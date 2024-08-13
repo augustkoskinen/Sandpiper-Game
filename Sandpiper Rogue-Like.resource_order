@@ -18,9 +18,12 @@
   ],
   "ResourceOrderSettings":[
     {"name":"oCam","order":1,"path":"objects/oCam/oCam.yy",},
+    {"name":"oWave","order":3,"path":"objects/oWave/oWave.yy",},
+    {"name":"oWaveManager","order":2,"path":"objects/oWaveManager/oWaveManager.yy",},
     {"name":"sPiperL","order":3,"path":"sprites/sPiperL/sPiperL.yy",},
     {"name":"sPiperR","order":1,"path":"sprites/sPiperR/sPiperR.yy",},
     {"name":"sPiperWL","order":4,"path":"sprites/sPiperWL/sPiperWL.yy",},
     {"name":"sPiperWR","order":2,"path":"sprites/sPiperWR/sPiperWR.yy",},
+    {"name":"Sprite6","order":16,"path":"sprites/Sprite6/Sprite6.yy",},
   ],
 }
