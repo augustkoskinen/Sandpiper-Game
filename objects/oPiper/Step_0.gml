@@ -17,9 +17,9 @@ if (inputud==0&&inputrl==0) {
 		dir = inputrl;
 	
 	if(dir==1) {
-		sprite_index = sPiperWL
+		sprite_index = sPiperLW
 	} else {
-		sprite_index = sPiperWR
+		sprite_index = sPiperRW
 	}
 	
 	var xadd = lengthdir_x(RUN_SPEED*delta_time/1000000,movedirection)

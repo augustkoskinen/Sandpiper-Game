@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"WaveSpawner",
+  "%Name":"spawnWave",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"WaveSpawner",
+  "name":"spawnWave",
   "parent":{
     "name":"Scripts",
     "path":"folders/Scripts.yy",
