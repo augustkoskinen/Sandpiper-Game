@@ -40,6 +40,7 @@
   "resources":[
     {"id":{"name":"oCam","path":"objects/oCam/oCam.yy",},},
     {"id":{"name":"oCrab","path":"objects/oCrab/oCrab.yy",},},
+    {"id":{"name":"oDepth","path":"objects/oDepth/oDepth.yy",},},
     {"id":{"name":"oFish","path":"objects/oFish/oFish.yy",},},
     {"id":{"name":"oFoodManager","path":"objects/oFoodManager/oFoodManager.yy",},},
     {"id":{"name":"oGameManager","path":"objects/oGameManager/oGameManager.yy",},},
@@ -67,6 +68,9 @@
     {"id":{"name":"sPiperTorsoR","path":"sprites/sPiperTorsoR/sPiperTorsoR.yy",},},
     {"id":{"name":"sPiperTorsoRA","path":"sprites/sPiperTorsoRA/sPiperTorsoRA.yy",},},
     {"id":{"name":"sPiperTorsoRW","path":"sprites/sPiperTorsoRW/sPiperTorsoRW.yy",},},
+    {"id":{"name":"Sprite20","path":"sprites/Sprite20/Sprite20.yy",},},
+    {"id":{"name":"Sprite21","path":"sprites/Sprite21/Sprite21.yy",},},
+    {"id":{"name":"Sprite22","path":"sprites/Sprite22/Sprite22.yy",},},
     {"id":{"name":"Sprite6","path":"sprites/Sprite6/Sprite6.yy",},},
     {"id":{"name":"sSand","path":"sprites/sSand/sSand.yy",},},
     {"id":{"name":"sand_ts","path":"tilesets/sand_ts/sand_ts.yy",},},

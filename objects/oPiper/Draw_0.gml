@@ -5,6 +5,9 @@ var inputud = keyboard_check(ord("S"))-keyboard_check(ord("W"))
 
 var movedirection = round(point_direction(0,0,inputrl,inputud))
 	
+dsList = ds_list_create();
+curDepth = collision_rectangle_list(bbox_left, bbox_top, bbox_right, bbox_bottom, oDepth, false, true, dsList, false);
+
 if (inputud==0&&inputrl==0) {
 	movedirection = -1
 	state = playerstate.idle

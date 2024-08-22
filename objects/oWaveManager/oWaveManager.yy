@@ -26,7 +26,7 @@
   "physicsShapePoints":[],
   "physicsStartAwake":true,
   "properties":[
-    {"$GMObjectProperty":"v1","%Name":"DistFromLeft","filters":[],"listItems":[],"multiselect":false,"name":"DistFromLeft","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"200","varType":1,},
+    {"$GMObjectProperty":"v1","%Name":"DistFromTop","filters":[],"listItems":[],"multiselect":false,"name":"DistFromTop","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"200","varType":1,},
     {"$GMObjectProperty":"v1","%Name":"DepthCount","filters":[],"listItems":[],"multiselect":false,"name":"DepthCount","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"5","varType":1,},
   ],
   "resourceType":"GMObject",
