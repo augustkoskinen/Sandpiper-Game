@@ -1,7 +1,7 @@
 RUN_SPEED = 200;
 dir = 1;
 
-curDepth  = 0;
+curDepth = 0;
 
 torsoSprite = noone;
 torsoInd = 0;
