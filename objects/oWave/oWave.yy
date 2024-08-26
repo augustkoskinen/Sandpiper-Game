@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"Sprite20",
-    "path":"sprites/Sprite20/Sprite20.yy",
+    "name":"sDepthLevels",
+    "path":"sprites/sDepthLevels/sDepthLevels.yy",
   },
   "spriteMaskId":null,
   "visible":true,

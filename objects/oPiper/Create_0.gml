@@ -14,6 +14,8 @@ foodPoints = 0;
 charge = 0;
 chargeMax = 0;
 
+pixelDims = shader_get_uniform(sWhiteOutline,"texture_Pixel")
+dragitem = noone;
 slotLength = 2;
 slots = array_create(0);
 createItem(0);
@@ -28,5 +30,6 @@ enum playerstate {
 
 enum playerattackstate {
 	attacking,
+	hit,
 	idle
 }
