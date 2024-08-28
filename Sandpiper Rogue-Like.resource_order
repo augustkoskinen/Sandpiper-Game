@@ -37,6 +37,7 @@
     {"name":"sDamage","order":2,"path":"shaders/sDamage/sDamage.yy",},
     {"name":"sWhiteOutline","order":1,"path":"shaders/sWhiteOutline/sWhiteOutline.yy",},
     {"name":"sCol","order":10,"path":"sprites/sCol/sCol.yy",},
+    {"name":"sCrabBlueDead","order":4,"path":"sprites/sCrabBlueDead/sCrabBlueDead.yy",},
     {"name":"sCrabBlueScuttle","order":1,"path":"sprites/sCrabBlueScuttle/sCrabBlueScuttle.yy",},
     {"name":"sCrabRed","order":2,"path":"sprites/sCrabRed/sCrabRed.yy",},
     {"name":"sCrabRedScuttle","order":3,"path":"sprites/sCrabRedScuttle/sCrabRedScuttle.yy",},

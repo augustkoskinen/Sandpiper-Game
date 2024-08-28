@@ -59,6 +59,7 @@
     {"id":{"name":"sWhiteOutline","path":"shaders/sWhiteOutline/sWhiteOutline.yy",},},
     {"id":{"name":"sCol","path":"sprites/sCol/sCol.yy",},},
     {"id":{"name":"sCrabBlue","path":"sprites/sCrabBlue/sCrabBlue.yy",},},
+    {"id":{"name":"sCrabBlueDead","path":"sprites/sCrabBlueDead/sCrabBlueDead.yy",},},
     {"id":{"name":"sCrabBlueScuttle","path":"sprites/sCrabBlueScuttle/sCrabBlueScuttle.yy",},},
     {"id":{"name":"sCrabRed","path":"sprites/sCrabRed/sCrabRed.yy",},},
     {"id":{"name":"sCrabRedScuttle","path":"sprites/sCrabRedScuttle/sCrabRedScuttle.yy",},},

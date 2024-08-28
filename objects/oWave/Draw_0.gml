@@ -35,6 +35,6 @@ if(y > room_height/6 + 110 && spd < 0) {
 	instance_destroy(self, true);
 }
 
-show_debug_message(spd)
+//show_debug_message(spd)
 y -= spd*delta_time/300000;
 draw_self();
