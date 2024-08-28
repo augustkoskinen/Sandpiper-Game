@@ -2,8 +2,8 @@ state = itemState.buried;
 
 pixelDims = shader_get_uniform(sWhiteOutline,"texture_Pixel")
 
-x = 128
-y = 128
+x = 128;
+y = 128;
 
 vely = 0;
 jumpadd = 0;
@@ -45,4 +45,12 @@ function drag() {
 	jumpadd=0
     yadd = 0;
     vely = 0;
+}
+
+function digOut() {
+	if(state==itemState.buried) {
+		state = itemState.dropped;
+        touchedplayer = true;
+        jumpadd = 4.5;
+	}
 }
