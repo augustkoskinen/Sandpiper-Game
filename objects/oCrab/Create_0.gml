@@ -1,3 +1,7 @@
+event_inherited()
+
+hp = 3;
+
 scuttleTime = 0;
 scuttlex = 0;
 scuttlexmax = 0;

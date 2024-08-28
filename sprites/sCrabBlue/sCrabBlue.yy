@@ -1,8 +1,8 @@
 {
   "$GMSprite":"",
   "%Name":"sCrabBlue",
-  "bboxMode":0,
-  "bbox_bottom":17,
+  "bboxMode":2,
+  "bbox_bottom":15,
   "bbox_left":4,
   "bbox_right":19,
   "bbox_top":9,

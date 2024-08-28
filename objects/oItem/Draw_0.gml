@@ -10,11 +10,6 @@ if(state==itemState.picked) {
 } else if(state==itemState.buried) {
     sprite_index = sItemSand
     image_index = type
-    if(place_meeting(x,y,oPiper)&&oPiper.attackstate==playerattackstate.hit) {
-        state = itemState.dropped;
-        touchedplayer = true;
-        jumpadd = 4.5;
-    }
 } else if(state == itemState.dragging) {
 	hovering = true;
 	x = mouse_x

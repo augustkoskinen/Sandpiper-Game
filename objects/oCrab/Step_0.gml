@@ -1,7 +1,12 @@
+event_inherited()
+
 var _dt = delta_time/1000000	
 if(rundir!=-1) {
 	sprite_index = scuttleSpr
+	
 	if(distance_to_object(oPiper)>128) rundir = -1
+	else rundir = point_direction(x,y,oPiper.x,oPiper.y)+180
+	
 	x+=lengthdir_x(scuttleSpeed,rundir)*_dt
 	y+=lengthdir_y(scuttleSpeed,rundir)*_dt
 } else if(driftTime>0) {

@@ -1,6 +1,8 @@
 RUN_SPEED = 200;
 dir = 1;
 
+hitcooldown = 0;
+
 curDepth = 0;
 
 torsoSprite = noone;
@@ -8,6 +10,7 @@ torsoInd = 0;
 legsSprite = noone;
 legsInd = 0;
 
+curdamage = 1;
 hp = 10;
 stamina = 10;
 foodPoints = 0;

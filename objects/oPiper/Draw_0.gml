@@ -8,7 +8,8 @@ var inputud = keyboard_check(ord("S"))-keyboard_check(ord("W"))
 var movedirection = round(point_direction(0,0,inputrl,inputud))
 
 dsList = ds_list_create();
-curDepth = collision_rectangle_list(bbox_left, bbox_top, bbox_right, bbox_bottom, oDepth, false, true, dsList, false);
+curDepth = collision_rectangle_list(bbox_left, bbox_top, bbox_right, bbox_bottom, oWaveManager, false, true, dsList, false);
+//show_debug_message(curDepth);
 
 if (inputud==0&&inputrl==0) {
 	movedirection = -1
@@ -101,4 +102,26 @@ legsInd+=_dt*sprite_get_speed(legsSprite)
 if(legsInd>=sprite_get_number(legsSprite)) 
 	legsInd = 0;
 	
-if(round(torsoInd)==2) attackstate = playerattackstate.hit
+if(floor(torsoInd)==2&&hitcooldown<=0) {
+	attackstate = playerattackstate.hit
+	hitcooldown = 1
+} else if(hitcooldown>0) hitcooldown-=_dt*sprite_get_speed(torsoSprite)
+
+if(attackstate==playerattackstate.hit) {
+	var hitx = dir==1 ? x+9 : x-9
+	var hity = y-1
+	
+	var attackcollist = ds_list_create()
+	collision_circle_list(hitx,hity,8,all,true,true,attackcollist,false);
+	
+	for(var i = 0; i < ds_list_size(attackcollist); i++) {
+		var col = ds_list_find_value(attackcollist,i);
+		if(object_get_parent(col.object_index)==oFoodPar) {
+			col.takeDamage();
+			break;
+		} else if(col.object_index==oItem) {
+			col.digOut()
+			break;
+		}
+	}
+}

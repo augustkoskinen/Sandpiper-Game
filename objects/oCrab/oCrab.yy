@@ -13,8 +13,8 @@
     "path":"folders/Objects.yy",
   },
   "parentObjectId":{
-    "name":"oFoodManager",
-    "path":"objects/oFoodManager/oFoodManager.yy",
+    "name":"oFoodPar",
+    "path":"objects/oFoodPar/oFoodPar.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
