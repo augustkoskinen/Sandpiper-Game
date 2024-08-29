@@ -1,0 +1,1 @@
+createCreature(0,100,100);

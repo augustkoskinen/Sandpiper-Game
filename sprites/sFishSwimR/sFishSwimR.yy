@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"Food",
-    "path":"folders/Sprites/Food.yy",
+    "name":"Fish",
+    "path":"folders/Sprites/Food&Creatures/Fish.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

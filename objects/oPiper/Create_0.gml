@@ -24,15 +24,22 @@ slots = array_create(0);
 createItem(0);
 
 state = playerstate.running;
-attackstate = playerattackstate.attacking
+attackstate = playerattackstate.attacking;
+celebratechange = false;
 
 enum playerstate {
 	idle,
-	running
+	running,
+	celebrating
 }
 
 enum playerattackstate {
 	attacking,
 	hit,
 	idle
+}
+
+function celebrate() {
+	state = playerstate.celebrating;
+	celebratechange = false;
 }

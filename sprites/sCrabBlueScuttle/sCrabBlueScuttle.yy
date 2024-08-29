@@ -27,7 +27,7 @@
   "origin":4,
   "parent":{
     "name":"Crab",
-    "path":"folders/Sprites/Food/Crab.yy",
+    "path":"folders/Sprites/Food&Creatures/Crab.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -13,24 +13,38 @@ curDepth = collision_rectangle_list(bbox_left, bbox_top, bbox_right, bbox_bottom
 
 if (inputud==0&&inputrl==0) {
 	movedirection = -1
-	state = playerstate.idle
+	if(state!=playerstate.celebrating)
+		state = playerstate.idle
 	if(dir==1) {
-		torsoSprite = sPiperTorsoR
+		if(state==playerstate.celebrating) {
+			torsoSprite = sPiperTorsoRE
+		} else
+			torsoSprite = sPiperTorsoR
 		legsSprite = sPiperLegsR
 	} else {
-		torsoSprite = sPiperTorsoL
+		if(state==playerstate.celebrating)
+			torsoSprite = sPiperTorsoLE
+		else
+			torsoSprite = sPiperTorsoL
 		legsSprite = sPiperLegsL
 	}
 } else {
-	state = playerstate.running
+	if(state!=playerstate.celebrating)
+		state = playerstate.running
 	if(inputrl!=0)
 		dir = inputrl;
 	
 	if(dir==1) {
-		torsoSprite = sPiperTorsoRW
+		if(state==playerstate.celebrating)
+			torsoSprite = sPiperTorsoRE
+		else
+			torsoSprite = sPiperTorsoRW
 		legsSprite = sPiperLegsRW
 	} else {
-		torsoSprite = sPiperTorsoLW
+		if(state==playerstate.celebrating)
+			torsoSprite = sPiperTorsoLE
+		else
+			torsoSprite = sPiperTorsoLW
 		legsSprite = sPiperLegsLW
 	}
 	
@@ -42,25 +56,40 @@ if (inputud==0&&inputrl==0) {
 }
 
 var hoveritem = (collision_point(mouse_x,mouse_y,oItem,true,false))
+var hoverfood = (collision_point(mouse_x,mouse_y,oFood,true,false))
+if(hoverfood!=noone && !hoverfood.edible) hoverfood = noone;
 var hoveringInv = false;
 
 if(dragitem!=noone&&place_meeting(x,y,dragitem))
 	hoveringInv = true;
 
 if(mouse_check_button(mb_left)) {
-	if(hoveritem!=noone&& hoveritem.state==itemState.dropped) {
+	if(hoveritem!=noone && hoveritem.state==foodState.dropped) {
 		dragitem = hoveritem
 		hoveritem.drag();
-	} else if(!dragitem)
+	} else if(hoverfood!=noone && hoverfood.state==itemState.dropped) {
+		dragitem = hoverfood;
+		hoverfood.drag();
+	} else if(!dragitem&&state!=playerstate.celebrating)
 		attackstate = playerattackstate.attacking
 } else {
 	if(dragitem) {
-		if(hoveringInv) {
-			hoveritem.pickUp();
-			dragitem = noone;
-		} else {
-			hoveritem.drop(mouse_x,mouse_y);
-			dragitem = noone;
+		if(dragitem.object_index == oItem) {
+			if(hoveringInv) {
+				dragitem.pickUp();
+				dragitem = noone;
+			} else {
+				dragitem.drop(mouse_x,mouse_y);
+				dragitem = noone;
+			} 
+		} else if (dragitem.object_index == oFood) {
+			if(hoveringInv) {
+				dragitem.eat();
+				dragitem = noone;
+			} else {
+				dragitem.drop(mouse_x,mouse_y);
+				dragitem = noone;
+			} 
 		}
 	}
 	
@@ -102,7 +131,7 @@ legsInd+=_dt*sprite_get_speed(legsSprite)
 if(legsInd>=sprite_get_number(legsSprite)) 
 	legsInd = 0;
 	
-if(floor(torsoInd)==2&&hitcooldown<=0) {
+if(floor(torsoInd)==4&&hitcooldown<=0) {
 	attackstate = playerattackstate.hit
 	hitcooldown = 1
 } else if(hitcooldown>0) hitcooldown-=_dt*sprite_get_speed(torsoSprite)
@@ -116,7 +145,7 @@ if(attackstate==playerattackstate.hit) {
 	
 	for(var i = 0; i < ds_list_size(attackcollist); i++) {
 		var col = ds_list_find_value(attackcollist,i);
-		if(object_get_parent(col.object_index)==oFoodPar) {
+		if(object_get_parent(col.object_index)==oCreaturePar) {
 			col.takeDamage();
 			break;
 		} else if(col.object_index==oItem) {
@@ -125,3 +154,8 @@ if(attackstate==playerattackstate.hit) {
 		}
 	}
 }
+
+if(state==playerstate.celebrating&&!celebratechange&&floor(torsoInd)==2)
+	celebratechange = true;
+if(state==playerstate.celebrating&&celebratechange&&floor(torsoInd)==0)
+	state = playerstate.idle;

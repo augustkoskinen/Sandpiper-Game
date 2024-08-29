@@ -9,8 +9,8 @@
   "name":"oCam",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Player&Items",
+    "path":"folders/Objects/Player&Items.yy",
   },
   "parentObjectId":null,
   "persistent":false,

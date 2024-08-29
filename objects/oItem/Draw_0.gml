@@ -12,8 +12,8 @@ if(state==itemState.picked) {
     image_index = type
 } else if(state == itemState.dragging) {
 	hovering = true;
-	x = mouse_x
-	y = mouse_y
+	x = mouse_x;
+	y = mouse_y;
 }
 
 if(hovering) {

@@ -9,12 +9,12 @@
   "name":"oCrab",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Foods",
+    "path":"folders/Objects/Foods.yy",
   },
   "parentObjectId":{
-    "name":"oFoodPar",
-    "path":"objects/oFoodPar/oFoodPar.yy",
+    "name":"oCreaturePar",
+    "path":"objects/oCreaturePar/oCreaturePar.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
