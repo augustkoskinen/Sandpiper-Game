@@ -1,5 +1,4 @@
 hurtRed = 0;
-utimer = shader_get_uniform(sDamage,"utimer")
 deathtimer = -1;
 deathend = 100;
 

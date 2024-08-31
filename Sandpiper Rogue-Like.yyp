@@ -62,7 +62,6 @@
     {"id":{"name":"createFood","path":"scripts/createFood/createFood.yy",},},
     {"id":{"name":"createItem","path":"scripts/createItem/createItem.yy",},},
     {"id":{"name":"spawnWave","path":"scripts/spawnWave/spawnWave.yy",},},
-    {"id":{"name":"sDamage","path":"shaders/sDamage/sDamage.yy",},},
     {"id":{"name":"sWhiteOutline","path":"shaders/sWhiteOutline/sWhiteOutline.yy",},},
     {"id":{"name":"sBlood","path":"sprites/sBlood/sBlood.yy",},},
     {"id":{"name":"sCol","path":"sprites/sCol/sCol.yy",},},

@@ -39,7 +39,6 @@
     {"name":"createCreature","order":3,"path":"scripts/createCreature/createCreature.yy",},
     {"name":"createFood","order":2,"path":"scripts/createFood/createFood.yy",},
     {"name":"createItem","order":1,"path":"scripts/createItem/createItem.yy",},
-    {"name":"sDamage","order":2,"path":"shaders/sDamage/sDamage.yy",},
     {"name":"sWhiteOutline","order":1,"path":"shaders/sWhiteOutline/sWhiteOutline.yy",},
     {"name":"sBlood","order":10,"path":"sprites/sBlood/sBlood.yy",},
     {"name":"sCol","order":10,"path":"sprites/sCol/sCol.yy",},
