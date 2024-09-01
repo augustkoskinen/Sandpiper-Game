@@ -8,7 +8,7 @@ var inputud = keyboard_check(ord("S"))-keyboard_check(ord("W"))
 var movedirection = round(point_direction(0,0,inputrl,inputud))
 
 dsList = ds_list_create();
-curDepth = collision_rectangle_list(bbox_left, bbox_top, bbox_right, bbox_bottom, oWaveManager, false, true, dsList, false);
+curDepth = collision_rectangle_list(bbox_left, bbox_top, bbox_right, bbox_bottom, oWavePar, false, true, dsList, false);
 //show_debug_message(curDepth);
 
 if (inputud==0&&inputrl==0) {

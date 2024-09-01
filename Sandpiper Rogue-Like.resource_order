@@ -36,6 +36,7 @@
     {"name":"oPiper","order":2,"path":"objects/oPiper/oPiper.yy",},
     {"name":"oWave","order":2,"path":"objects/oWave/oWave.yy",},
     {"name":"oWaveManager","order":1,"path":"objects/oWaveManager/oWaveManager.yy",},
+    {"name":"oWavePar","order":3,"path":"objects/oWavePar/oWavePar.yy",},
     {"name":"createCreature","order":3,"path":"scripts/createCreature/createCreature.yy",},
     {"name":"createFood","order":2,"path":"scripts/createFood/createFood.yy",},
     {"name":"createItem","order":1,"path":"scripts/createItem/createItem.yy",},
