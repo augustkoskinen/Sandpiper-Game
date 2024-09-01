@@ -1,6 +1,8 @@
 RUN_SPEED = 200;
 dir = 1;
 
+hasAttacked = false
+
 hitcooldown = 0;
 
 curDepth = 0;

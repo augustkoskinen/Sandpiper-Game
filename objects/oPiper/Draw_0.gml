@@ -63,15 +63,15 @@ var hoveringInv = false;
 if(dragitem!=noone&&place_meeting(x,y,dragitem))
 	hoveringInv = true;
 
-if(mouse_check_button(mb_left)) {
-	if(hoveritem!=noone && hoveritem.state==foodState.dropped) {
-		dragitem = hoveritem
-		hoveritem.drag();
-	} else if(hoverfood!=noone && hoverfood.state==itemState.dropped) {
-		dragitem = hoverfood;
-		hoverfood.drag();
-	} else if(!dragitem&&state!=playerstate.celebrating)
-		attackstate = playerattackstate.attacking
+if(mouse_check_button(mb_left)) { //line 66
+    if(dragitem==noone&&hoveritem!=noone && hoveritem.state==foodState.dropped) {
+        dragitem = hoveritem
+        hoveritem.drag();
+    } else if(dragitem==noone&&hoverfood!=noone && hoverfood.state==itemState.dropped) {
+        dragitem = hoverfood;
+        hoverfood.drag();
+    } else if(!dragitem&&state!=playerstate.celebrating)
+        attackstate = playerattackstate.attacking
 } else {
 	if(dragitem) {
 		if(dragitem.object_index == oItem) {
@@ -92,15 +92,21 @@ if(mouse_check_button(mb_left)) {
 			} 
 		}
 	}
-	
-	attackstate = playerattackstate.idle
+
+	//attackstate = playerattackstate.idle
 }
+
 
 if(attackstate == playerattackstate.attacking) {
 	if(dir==1) {
 		torsoSprite = sPiperTorsoRA
 	} else {
 		torsoSprite = sPiperTorsoLA
+	}
+	hasAttacked = true
+	if(hasAttacked == true && floor(torsoInd) >= 9) {
+		attackstate = playerattackstate.idle;
+		hasAttacked = false
 	}
 }
 
@@ -131,17 +137,18 @@ legsInd+=_dt*sprite_get_speed(legsSprite)
 if(legsInd>=sprite_get_number(legsSprite)) 
 	legsInd = 0;
 	
-if(floor(torsoInd)==4&&hitcooldown<=0) {
+if((floor(torsoInd)==2 || floor(torsoInd)==3) && hitcooldown<=0) {
 	attackstate = playerattackstate.hit
-	hitcooldown = 1
-} else if(hitcooldown>0) hitcooldown-=_dt*sprite_get_speed(torsoSprite)
+	hasAttacked = true;
+	hitcooldown = 1;
+} else if(hitcooldown>0 && torsoInd >= 4) hitcooldown-=_dt*sprite_get_speed(torsoSprite)
 
 if(attackstate==playerattackstate.hit) {
 	var hitx = dir==1 ? x+9 : x-9
-	var hity = y-1
+	var hity = y-3
 	
 	var attackcollist = ds_list_create()
-	collision_circle_list(hitx,hity,8,all,true,true,attackcollist,false);
+	collision_circle_list(hitx,hity,12,all,true,true,attackcollist,false);
 	
 	for(var i = 0; i < ds_list_size(attackcollist); i++) {
 		var col = ds_list_find_value(attackcollist,i);
@@ -154,6 +161,13 @@ if(attackstate==playerattackstate.hit) {
 		}
 	}
 }
+
+//show_debug_message(floor(torsoInd))
+
+
+
+
+
 
 if(state==playerstate.celebrating&&!celebratechange&&floor(torsoInd)==2)
 	celebratechange = true;
