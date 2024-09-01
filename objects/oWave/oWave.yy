@@ -14,8 +14,8 @@
     "path":"folders/Objects/Environment.yy",
   },
   "parentObjectId":{
-    "name":"oWaveManager",
-    "path":"objects/oWaveManager/oWaveManager.yy",
+    "name":"oWavePar",
+    "path":"objects/oWavePar/oWavePar.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

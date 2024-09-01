@@ -57,6 +57,7 @@
     {"id":{"name":"oPiper","path":"objects/oPiper/oPiper.yy",},},
     {"id":{"name":"oWave","path":"objects/oWave/oWave.yy",},},
     {"id":{"name":"oWaveManager","path":"objects/oWaveManager/oWaveManager.yy",},},
+    {"id":{"name":"oWavePar","path":"objects/oWavePar/oWavePar.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
     {"id":{"name":"createCreature","path":"scripts/createCreature/createCreature.yy",},},
     {"id":{"name":"createFood","path":"scripts/createFood/createFood.yy",},},

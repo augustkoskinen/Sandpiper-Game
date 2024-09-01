@@ -1,45 +1,65 @@
-event_inherited()
+//event_inherited()
+var _dt = delta_time/1000000
 
-if(deathtimer==-1) {
-	var _dt = delta_time/1000000	
-	if(rundir!=-1) {
-		sprite_index = scuttleSpr
+if(despawnwait==-1) {
+	if(deathtimer==-1) {
+		if(rundir!=-1) {
+			sprite_index = scuttleSpr
 	
-		if(distance_to_object(oPiper)>128) rundir = -1
-		else rundir = point_direction(x,y,oPiper.x,oPiper.y)+180
+			if(distance_to_object(oPiper)>128) rundir = -1
+			else rundir = point_direction(x,y,oPiper.x,oPiper.y)+180
 	
-		x+=lengthdir_x(scuttleSpeed,rundir)*_dt
-		y+=lengthdir_y(scuttleSpeed,rundir)*_dt
-	} else if(driftTime>0) {
-		sprite_index = idleSpr
-		x+=driftx*_dt;
-		y+=drifty*_dt;
+			velx=lengthdir_x(scuttleSpeed,rundir)*_dt
+			vely=lengthdir_y(scuttleSpeed,rundir)*_dt
+		} else if(driftTime>0) {
+			sprite_index = idleSpr
+			velx=driftx*_dt;
+			vely=drifty*_dt;
 	
-		driftTime-=_dt
-		if(driftTime<=0) {
-			scuttleTime = random_range(1,3)
-			scuttlex = scuttleSpeed;
-			var maxmin = random_range(16,48)
-			scuttlexmax = x+maxmin
-			scuttlexmin = x-maxmin
+			driftTime-=_dt
+			if(driftTime<=0) {
+				scuttleTime = random_range(1,3)
+				scuttlex = scuttleSpeed;
+				var maxmin = random_range(16,48)
+				scuttlexmax = x+maxmin
+				scuttlexmin = x-maxmin
+			}
+		} else if(scuttleTime>0) {
+			sprite_index = scuttleSpr
+			velx=scuttlex*_dt
+			vely=0
+			if(x<scuttlexmin) scuttlex = scuttleSpeed
+			if(x>scuttlexmax) scuttlex = -scuttleSpeed
+	
+			scuttleTime-=_dt
+			if(scuttleTime<=0) {
+				driftTime = random_range(1,2);
+				
+				var maxxdist = room_width-x
+				var maxydist = room_height-y
+				
+				var pointx = random_range(max(-30,-x/20),min(30,maxxdist/20));
+				var pointy = random_range(max(-30,-y/20),min(30,maxydist/20));
+				
+				var dir = point_direction(0,0,pointx,pointy)
+				
+				driftx = lengthdir_x(driftSpeed, dir)
+				drifty = lengthdir_y(driftSpeed, dir)
+			}
 		}
-	} else if(scuttleTime>0) {
-		sprite_index = scuttleSpr
-		x+=scuttlex*_dt
-		if(x<scuttlexmin) scuttlex = scuttleSpeed
-		if(x>scuttlexmax) scuttlex = -scuttleSpeed
-	
-		scuttleTime-=_dt
-		if(scuttleTime<=0) {
-			driftTime = random_range(1,2);
 
-			var dir = random_range(0,359)
-			driftx = lengthdir_x(driftSpeed, dir)
-			drifty = lengthdir_y(driftSpeed, dir)
-		}
+		if(distance_to_object(oPiper)<96&&irandom_range(0,30)==0)
+			rundir = point_direction(x,y,oPiper.x,oPiper.y)+180
 	}
-
-	if(distance_to_object(oPiper)<96&&irandom_range(0,30)==0)
-		rundir = point_direction(x,y,oPiper.x,oPiper.y)+180
 }
+
+x+=velx
+y+=vely
+if((x<0||y<0||x>room_width||y>room_height)&&despawnwait==-1)
+	despawnwait = 1;
+
+if(despawnwait<=0&&despawnwait>-1) instance_destroy();
+else if(despawnwait>0) despawnwait-=_dt;
+
 depth = -y
+image_alpha = despawnwait==-1?1:despawnwait;

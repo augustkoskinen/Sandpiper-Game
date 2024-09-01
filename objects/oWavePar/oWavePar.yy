@@ -1,21 +1,15 @@
 {
   "$GMObject":"",
-  "%Name":"oDepth",
-  "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-  ],
+  "%Name":"oWavePar",
+  "eventList":[],
   "managed":true,
-  "name":"oDepth",
+  "name":"oWavePar",
   "overriddenProperties":[],
   "parent":{
     "name":"Environment",
     "path":"folders/Objects/Environment.yy",
   },
-  "parentObjectId":{
-    "name":"oWavePar",
-    "path":"objects/oWavePar/oWavePar.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -33,10 +27,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"sWave",
-    "path":"sprites/sWave/sWave.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }
