@@ -24,9 +24,14 @@ if {
 	
 }
 
+
 if(y <= room_height/6 && collision_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, oWave, false, true) == noone && !crashed) {
 	if(spd < 50) {
 		spd +=  10*delta_time/30000;
+		if(audio) {
+			audio_play_sound(SND_WaveCrash, 1, false)
+			audio = false;
+		}
 	} else {
 		crashed = true;
 	}

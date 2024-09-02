@@ -48,8 +48,14 @@ if (inputud==0&&inputrl==0) {
 		legsSprite = sPiperLegsLW
 	}
 	
+	
+	
 	var xadd = lengthdir_x(RUN_SPEED*delta_time/1000000,movedirection)
 	var yadd = lengthdir_y(RUN_SPEED*delta_time/1000000,movedirection)
+
+	if(floor(legsInd) == 0) {
+		//audio_play_sound(SND_Footstep, 1, false, 1, 0, random_range(1.0, 1.6))
+	}
 
 	x+=xadd
 	y+=yadd
@@ -137,7 +143,7 @@ legsInd+=_dt*sprite_get_speed(legsSprite)
 if(legsInd>=sprite_get_number(legsSprite)) 
 	legsInd = 0;
 	
-if((floor(torsoInd)==2 || floor(torsoInd)==3) && hitcooldown<=0) {
+if((floor(torsoInd)==2 || floor(torsoInd)==3) && hitcooldown<=0 && attackstate == playerattackstate.attacking) {
 	attackstate = playerattackstate.hit
 	hasAttacked = true;
 	hitcooldown = 1;

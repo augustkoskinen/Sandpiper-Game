@@ -1,5 +1,6 @@
 dsList = ds_list_create();
 
+audio = true;
 curDepth = 6;
 
 crashed = false;
