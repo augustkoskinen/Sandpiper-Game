@@ -1,4 +1,6 @@
-if(attackstate == playerattackstate.hit) attackstate = playerattackstate.attacking
+if(attackstate == playerattackstate.hit) {
+	attackstate = playerattackstate.attacking
+}
 
 var _dt = delta_time/1000000
 
@@ -9,39 +11,39 @@ var movedirection = round(point_direction(0,0,inputrl,inputud))
 
 dsList = ds_list_create();
 curDepth = collision_rectangle_list(bbox_left, bbox_top, bbox_right, bbox_bottom, oWavePar, false, true, dsList, false);
-//show_debug_message(curDepth);
+
 
 if (inputud==0&&inputrl==0) {
 	movedirection = -1
-	if(state!=playerstate.celebrating)
+	if(attackstate!=playerattackstate.celebrating)
 		state = playerstate.idle
 	if(dir==1) {
-		if(state==playerstate.celebrating) {
+		if(attackstate==playerattackstate.celebrating) {
 			torsoSprite = sPiperTorsoRE
 		} else
 			torsoSprite = sPiperTorsoR
 		legsSprite = sPiperLegsR
 	} else {
-		if(state==playerstate.celebrating)
+		if(attackstate==playerattackstate.celebrating)
 			torsoSprite = sPiperTorsoLE
 		else
 			torsoSprite = sPiperTorsoL
 		legsSprite = sPiperLegsL
 	}
 } else {
-	if(state!=playerstate.celebrating)
+	if(attackstate!=playerattackstate.celebrating)
 		state = playerstate.running
 	if(inputrl!=0)
 		dir = inputrl;
 	
 	if(dir==1) {
-		if(state==playerstate.celebrating)
+		if(attackstate==playerattackstate.celebrating)
 			torsoSprite = sPiperTorsoRE
 		else
 			torsoSprite = sPiperTorsoRW
 		legsSprite = sPiperLegsRW
 	} else {
-		if(state==playerstate.celebrating)
+		if(attackstate==playerattackstate.celebrating)
 			torsoSprite = sPiperTorsoLE
 		else
 			torsoSprite = sPiperTorsoLW
@@ -69,15 +71,16 @@ var hoveringInv = false;
 if(dragitem!=noone&&place_meeting(x,y,dragitem))
 	hoveringInv = true;
 
-if(mouse_check_button(mb_left)) { //line 66
+if(mouse_check_button(mb_left)) {
     if(dragitem==noone&&hoveritem!=noone && hoveritem.state==foodState.dropped) {
         dragitem = hoveritem
         hoveritem.drag();
     } else if(dragitem==noone&&hoverfood!=noone && hoverfood.state==itemState.dropped) {
         dragitem = hoverfood;
         hoverfood.drag();
-    } else if(!dragitem&&state!=playerstate.celebrating)
+    } else if(!dragitem&&attackstate!=playerattackstate.celebrating) {
         attackstate = playerattackstate.attacking
+	}
 } else {
 	if(dragitem) {
 		if(dragitem.object_index == oItem) {
@@ -168,14 +171,7 @@ if(attackstate==playerattackstate.hit) {
 	}
 }
 
-//show_debug_message(floor(torsoInd))
-
-
-
-
-
-
-if(state==playerstate.celebrating&&!celebratechange&&floor(torsoInd)==2)
-	celebratechange = true;
-if(state==playerstate.celebrating&&celebratechange&&floor(torsoInd)==0)
-	state = playerstate.idle;
+if(attackstate==playerattackstate.celebrating&&!celebratedchange&&floor(torsoInd)==2)
+	celebratedchange = true;
+if(attackstate==playerattackstate.celebrating&&celebratedchange&&floor(torsoInd)==0)
+	attackstate = playerattackstate.idle;
