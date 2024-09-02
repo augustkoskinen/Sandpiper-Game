@@ -8,8 +8,8 @@
   "name":"oCreatureManager",
   "overriddenProperties":[],
   "parent":{
-    "name":"Foods",
-    "path":"folders/Objects/Foods.yy",
+    "name":"Creatures",
+    "path":"folders/Objects/Creatures.yy",
   },
   "parentObjectId":null,
   "persistent":false,

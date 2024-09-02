@@ -19,7 +19,7 @@ if(despawnwait==-1) {
 			driftTime-=_dt
 			if(driftTime<=0) {
 				scuttleTime = random_range(1,3)
-				scuttlex = scuttleSpeed;
+				scuttlex = irandom_range(1,2)==1?scuttleSpeed:-scuttleSpeed;
 				var maxmin = random_range(16,48)
 				scuttlexmax = x+maxmin
 				scuttlexmin = x-maxmin

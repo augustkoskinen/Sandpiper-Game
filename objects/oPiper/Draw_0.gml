@@ -161,7 +161,10 @@ if(attackstate==playerattackstate.hit) {
 	
 	for(var i = 0; i < ds_list_size(attackcollist); i++) {
 		var col = ds_list_find_value(attackcollist,i);
-		if(object_get_parent(col.object_index)==oCreaturePar) {
+		if(object_get_parent(col.object_index)==oBossPar) {
+			col.takeDamage();
+			break;
+		} else if(object_get_parent(col.object_index)==oCreaturePar) {
 			col.takeDamage();
 			break;
 		} else if(col.object_index==oItem) {
