@@ -1,7 +1,7 @@
 if(keyboard_check(ord("C"))) {
 	camera_set_view_size(view_camera[0],6400,4800);
 } else {
-	camera_set_view_size(view_camera[0],640,480);
+	camera_set_view_size(view_camera[0],320,240);
 }
 
 CamW = camera_get_view_width(view_camera[0]);

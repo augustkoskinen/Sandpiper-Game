@@ -1,3 +1,7 @@
+uPercent = shader_get_uniform(sWaterDraw,"uHeight")
+uWDpixelDims = shader_get_uniform(sWaterDraw,"texture_Pixel")
+_uniUV = shader_get_uniform(sWaterDraw, "u_uv");
+
 hurtRed = 0;
 deathtimer = -1;
 deathend = 100;

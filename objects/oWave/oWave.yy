@@ -34,8 +34,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sDepthLevels",
-    "path":"sprites/sDepthLevels/sDepthLevels.yy",
+    "name":"sWave",
+    "path":"sprites/sWave/sWave.yy",
   },
   "spriteMaskId":null,
   "visible":true,

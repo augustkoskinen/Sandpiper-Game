@@ -135,10 +135,10 @@ if(hoveringInv) {
 	
 	shader_reset();
 } else {
-	var percent = clamp((y-oWaveManager.DistFromTop)/(oWaveManager.DistFromTop*3),0,1)
+	var height = clamp((y-oWaveManager.DistFromTop)/(global.heightto32),0,1)*32
 	
-	var percenttorso = clamp((percent-.3)/.7,0,1) //2.33333333333x legs //70%
-	var percentlegs = clamp(percent/.3,0,1); //30%
+	if(height>1&&height<19)
+		draw_sprite_ext(height<=6?sRippleLegsTop: sRippleTorsoTop,rippletick,x,(y+1)-height,-dir,1,0,c_white,1);
 	
 	shader_set(sWaterDraw)
 	WDtexelW = texture_get_texel_width(sprite_get_texture(legsSprite,legsInd))
@@ -146,9 +146,8 @@ if(hoveringInv) {
 	var uvs = sprite_get_uvs(legsSprite, legsInd)
 	
 	shader_set_uniform_f(uWDpixelDims,WDtexelW,WDtexelH)
-	shader_set_uniform_f(uPercent,percentlegs)
+	shader_set_uniform_f(uPercent,height)
 	shader_set_uniform_f(_uniUV, uvs[0], uvs[1], uvs[2], uvs[3]);
-	shader_set_uniform_f(utopedge, -1);
 	
 	draw_sprite(legsSprite,legsInd,x,y);
 	
@@ -157,12 +156,14 @@ if(hoveringInv) {
 	var uvs = sprite_get_uvs(torsoSprite, torsoInd)
 	
 	shader_set_uniform_f(uWDpixelDims,WDtexelW,WDtexelH)
-	shader_set_uniform_f(uPercent,percenttorso)
+	shader_set_uniform_f(uPercent,max(height-6,0))
 	shader_set_uniform_f(_uniUV, uvs[0], uvs[1], uvs[2], uvs[3]);
-	shader_set_uniform_f(utopedge, uvs[3]-25*WDtexelH);
 	
 	draw_sprite(torsoSprite,torsoInd,x,y);
 	shader_reset()
+	
+	if(height>1&&height<19)
+		draw_sprite_ext(height<=6?sRippleLegsBottom: sRippleTorsoBottom,rippletick,x,(y+1)-height,-dir,1,0,c_white,1);
 }
 torsoInd+=_dt*sprite_get_speed(torsoSprite)
 if(torsoInd>=sprite_get_number(torsoSprite)) 
@@ -199,6 +200,8 @@ if(attackstate==playerattackstate.hit) {
 		}
 	}
 }
+
+rippletick+=_dt*3;
 
 if(attackstate==playerattackstate.celebrating&&!celebratedchange&&floor(torsoInd)==2)
 	celebratedchange = true;

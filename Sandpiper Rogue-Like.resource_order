@@ -12,5 +12,9 @@
     {"name":"oCreatureManager","order":1,"path":"objects/oCreatureManager/oCreatureManager.yy",},
     {"name":"oCreaturePar","order":2,"path":"objects/oCreaturePar/oCreaturePar.yy",},
     {"name":"sWaterDraw","order":1,"path":"shaders/sWaterDraw/sWaterDraw.yy",},
+    {"name":"sRippleLegsBottom","order":1,"path":"sprites/sRippleLegsBottom/sRippleLegsBottom.yy",},
+    {"name":"sRippleLegsTop","order":2,"path":"sprites/sRippleLegsTop/sRippleLegsTop.yy",},
+    {"name":"sRippleTorsoBottom","order":3,"path":"sprites/sRippleTorsoBottom/sRippleTorsoBottom.yy",},
+    {"name":"sRippleTorsoTop","order":4,"path":"sprites/sRippleTorsoTop/sRippleTorsoTop.yy",},
   ],
 }
