@@ -16,9 +16,9 @@
     {"$GMFolder":"","%Name":"Notes","folderPath":"folders/Notes.yy","name":"Notes","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Objects","folderPath":"folders/Objects.yy","name":"Objects","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Boss","folderPath":"folders/Objects/Boss.yy","name":"Boss","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Creatures","folderPath":"folders/Objects/Creatures.yy","name":"Creatures","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Environment","folderPath":"folders/Objects/Environment.yy","name":"Environment","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Foods","folderPath":"folders/Objects/Foods.yy","name":"Foods","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"Creatures","folderPath":"folders/Objects/Creatures.yy","name":"Creatures","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Player&Items","folderPath":"folders/Objects/Player&Items.yy","name":"Player&Items","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Particle Systems","folderPath":"folders/Particle Systems.yy","name":"Particle Systems","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Paths","folderPath":"folders/Paths.yy","name":"Paths","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -43,7 +43,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.6.2.162",
+    "IDEVersion":"2024.8.0.169",
   },
   "name":"Sandpiper Rogue-Like",
   "resources":[
@@ -69,6 +69,7 @@
     {"id":{"name":"createFood","path":"scripts/createFood/createFood.yy",},},
     {"id":{"name":"createItem","path":"scripts/createItem/createItem.yy",},},
     {"id":{"name":"spawnWave","path":"scripts/spawnWave/spawnWave.yy",},},
+    {"id":{"name":"sWaterDraw","path":"shaders/sWaterDraw/sWaterDraw.yy",},},
     {"id":{"name":"sWhiteOutline","path":"shaders/sWhiteOutline/sWhiteOutline.yy",},},
     {"id":{"name":"Background_Wind","path":"sounds/Background_Wind/Background_Wind.yy",},},
     {"id":{"name":"SND_Footstep","path":"sounds/SND_Footstep/SND_Footstep.yy",},},

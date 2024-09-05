@@ -7,7 +7,11 @@
   ],
   "managed":true,
   "name":"oCrab",
-  "overriddenProperties":[],
+  "overriddenProperties":[
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oCreaturePar","path":"objects/oCreaturePar/oCreaturePar.yy",},"propertyId":{"name":"hp","path":"objects/oCreaturePar/oCreaturePar.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"3",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oCreaturePar","path":"objects/oCreaturePar/oCreaturePar.yy",},"propertyId":{"name":"depthmin","path":"objects/oCreaturePar/oCreaturePar.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"0",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oCreaturePar","path":"objects/oCreaturePar/oCreaturePar.yy",},"propertyId":{"name":"depthmax","path":"objects/oCreaturePar/oCreaturePar.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"2",},
+  ],
   "parent":{
     "name":"Creatures",
     "path":"folders/Objects/Creatures.yy",

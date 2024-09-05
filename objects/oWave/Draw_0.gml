@@ -1,7 +1,7 @@
 curDepth = collision_rectangle_list(bbox_left, bbox_top, bbox_right, bbox_bottom, oDepth, false, true, dsList, false) +  collision_rectangle_list(bbox_left, bbox_top, bbox_right, bbox_bottom, oWave, false, true, dsList, false);
 
 
-image_index = curDepth-1;
+image_index = 0//curDepth-1;
 
 if(y <= room_height/6+120 && !(!crashed && spd < 0)) {
 	if(spd < 0 || y > room_height/6-100){

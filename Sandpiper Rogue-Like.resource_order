@@ -11,5 +11,6 @@
     {"name":"oBossPar","order":1,"path":"objects/oBossPar/oBossPar.yy",},
     {"name":"oCreatureManager","order":1,"path":"objects/oCreatureManager/oCreatureManager.yy",},
     {"name":"oCreaturePar","order":2,"path":"objects/oCreaturePar/oCreaturePar.yy",},
+    {"name":"sWaterDraw","order":1,"path":"shaders/sWaterDraw/sWaterDraw.yy",},
   ],
 }

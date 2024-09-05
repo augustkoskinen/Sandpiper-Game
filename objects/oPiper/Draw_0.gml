@@ -135,8 +135,34 @@ if(hoveringInv) {
 	
 	shader_reset();
 } else {
+	var percent = clamp((y-oWaveManager.DistFromTop)/(oWaveManager.DistFromTop*3),0,1)
+	
+	var percenttorso = clamp((percent-.3)/.7,0,1) //2.33333333333x legs //70%
+	var percentlegs = clamp(percent/.3,0,1); //30%
+	
+	shader_set(sWaterDraw)
+	WDtexelW = texture_get_texel_width(sprite_get_texture(legsSprite,legsInd))
+	WDtexelH = texture_get_texel_height(sprite_get_texture(legsSprite,legsInd))
+	var uvs = sprite_get_uvs(legsSprite, legsInd)
+	
+	shader_set_uniform_f(uWDpixelDims,WDtexelW,WDtexelH)
+	shader_set_uniform_f(uPercent,percentlegs)
+	shader_set_uniform_f(_uniUV, uvs[0], uvs[1], uvs[2], uvs[3]);
+	shader_set_uniform_f(utopedge, -1);
+	
 	draw_sprite(legsSprite,legsInd,x,y);
+	
+	WDtexelW = texture_get_texel_width(sprite_get_texture(torsoSprite,torsoInd))
+	WDtexelH = texture_get_texel_height(sprite_get_texture(torsoSprite,torsoInd))
+	var uvs = sprite_get_uvs(torsoSprite, torsoInd)
+	
+	shader_set_uniform_f(uWDpixelDims,WDtexelW,WDtexelH)
+	shader_set_uniform_f(uPercent,percenttorso)
+	shader_set_uniform_f(_uniUV, uvs[0], uvs[1], uvs[2], uvs[3]);
+	shader_set_uniform_f(utopedge, uvs[3]-25*WDtexelH);
+	
 	draw_sprite(torsoSprite,torsoInd,x,y);
+	shader_reset()
 }
 torsoInd+=_dt*sprite_get_speed(torsoSprite)
 if(torsoInd>=sprite_get_number(torsoSprite)) 

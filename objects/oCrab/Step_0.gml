@@ -1,4 +1,5 @@
-//event_inherited()
+event_inherited()
+
 var _dt = delta_time/1000000
 
 if(despawnwait==-1) {
@@ -55,11 +56,6 @@ if(despawnwait==-1) {
 
 x+=velx
 y+=vely
-if((x<0||y<0||x>room_width||y>room_height)&&despawnwait==-1)
-	despawnwait = 1;
-
-if(despawnwait<=0&&despawnwait>-1) instance_destroy();
-else if(despawnwait>0) despawnwait-=_dt;
 
 depth = -y
 image_alpha = despawnwait==-1?1:despawnwait;

@@ -3,11 +3,13 @@ waveIds = array_create(DepthCount);
 counter = current_time;
 timeTillSpawn = 4000;
 
-
+startingdepth = 10000;
 
 for(i = 0; i < DepthCount; i++) {
 	var xSpawn = 0;
 	var ySpawn = (DistFromTop * i) + DistFromTop;
-	array_set(waveIds, i, instance_create_depth(xSpawn, ySpawn, -i, oDepth));
+	var objectdepth = instance_create_depth(xSpawn, ySpawn, -startingdepth-i*32, oDepth);
+	objectdepth.level = i
+	array_set(waveIds, i, objectdepth);
 } 
-instance_create_depth(0, 0, -100, oWave);
+instance_create_depth(0, 0, -startingdepth-((DepthCount+2)*32), oWave);

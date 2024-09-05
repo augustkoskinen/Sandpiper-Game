@@ -19,7 +19,13 @@ foodPoints = 0;
 charge = 0;
 chargeMax = 0;
 
+uPercent = shader_get_uniform(sWaterDraw,"uPercent")
+uWDpixelDims = shader_get_uniform(sWaterDraw,"texture_Pixel")
+_uniUV = shader_get_uniform(sWaterDraw, "u_uv");
+utopedge = shader_get_uniform(sWaterDraw, "utopedge");
+
 pixelDims = shader_get_uniform(sWhiteOutline,"texture_Pixel")
+
 dragitem = noone;
 slotLength = 2;
 slots = array_create(0);
