@@ -43,4 +43,7 @@ if(y > room_height/6 + 110 && spd < 0) {
 
 //show_debug_message(spd)
 y -= spd*delta_time/300000;
-draw_self();
+
+depth = -2;
+
+draw_sprite_stretched(sprite_index,image_index,0,y,room_width,sprite_height);

@@ -7,10 +7,12 @@ hitcooldown = 0;
 
 curDepth = 0;
 
+
 torsoSprite = noone;
 torsoInd = 0;
 legsSprite = noone;
 legsInd = 0;
+prevLegsInd = 0;
 
 curdamage = 1;
 hp = 10;
@@ -20,7 +22,7 @@ charge = 0;
 chargeMax = 0;
 
 rippletick = 0;
-ripplefade = 0;
+ripplecooldown = 0;
 splashcooldown = 0;
 
 uPercent = shader_get_uniform(sWaterDraw,"uHeight")

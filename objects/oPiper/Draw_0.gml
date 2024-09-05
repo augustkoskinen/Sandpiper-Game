@@ -14,7 +14,6 @@ dsList = ds_list_create();
 curDepth = collision_rectangle_list(bbox_left, bbox_top, bbox_right, bbox_bottom, oWavePar, false, true, dsList, false);
 
 if (inputud==0&&inputrl==0) {
-	ripplefade+=_dt
 	movedirection = -1
 	splashcooldown=0;
 	if(attackstate!=playerattackstate.celebrating)
@@ -33,7 +32,6 @@ if (inputud==0&&inputrl==0) {
 		legsSprite = sPiperLegsL
 	}
 } else {
-	ripplefade-=_dt*3
 	if(attackstate!=playerattackstate.celebrating)
 		state = playerstate.running
 	if(inputrl!=0)
@@ -139,10 +137,6 @@ if(hoveringInv) {
 	shader_reset();
 } else {
 	
-	if(height>1&&height<19) {
-		draw_sprite_ext(height<=6?sRippleLegsTop: sRippleTorsoTop,rippletick,x,(y+1)-height,-dir,1,0,c_white,ripplefade);
-	}
-	
 	shader_set(sWaterDraw)
 	WDtexelW = texture_get_texel_width(sprite_get_texture(legsSprite,legsInd))
 	WDtexelH = texture_get_texel_height(sprite_get_texture(legsSprite,legsInd))
@@ -166,10 +160,26 @@ if(hoveringInv) {
 	shader_reset()
 	
 	if(height>1&&height<19) {
-		draw_sprite_ext(height<=6?sRippleLegsBottom: sRippleTorsoBottom,rippletick,x,(y+1)-height,-dir,1,0,c_white,ripplefade);
-		if ((inputud!=0||inputrl!=0)&&splashcooldown<=0) {
-			instance_create_depth(x,y-height+1,-(y-height+1),oWaterSplash);
+		if ((prevLegsInd!=floor(legsInd))&&splashcooldown<=0) {
+			prevLegsInd = floor(legsInd);
+			instance_create_depth(x,y-height+1,-(y-height+1)+20,oWaterSplashTop);
+			instance_create_depth(x,y-height+1,-(y-height+1)+(inputud>0?10:-8),oWaterSplashBottom);
+			
 			splashcooldown = .075;
+		} else if ((inputud==0&&inputrl==0)&&ripplecooldown<=0) {
+			var top = instance_create_depth(x,y-height+1,-(y-height+1)+20,oWaterSplashTop);
+			var bottom = instance_create_depth(x,y-height+1,-(y-height+1)-20,oWaterSplashBottom);
+
+			top.timer = .75;
+			top.timermax = .75;
+			bottom.timer = .75;
+			bottom.timermax = .75;
+			top.alphamax = .5;
+			bottom.alphamax = .5;
+			top.ripplemax = 1;
+			bottom.ripplemax = 1;
+			
+			ripplecooldown = .5;
 		}
 	}
 }
@@ -217,4 +227,4 @@ if(attackstate==playerattackstate.celebrating&&celebratedchange&&floor(torsoInd)
 	attackstate = playerattackstate.idle;
 	
 splashcooldown-=_dt;
-ripplefade = clamp(ripplefade,0,1);
+ripplecooldown-=_dt;

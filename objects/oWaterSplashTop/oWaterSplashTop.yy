@@ -1,12 +1,12 @@
 {
   "$GMObject":"",
-  "%Name":"oWaterSplash",
+  "%Name":"oWaterSplashTop",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"oWaterSplash",
+  "name":"oWaterSplashTop",
   "overriddenProperties":[],
   "parent":{
     "name":"Effects",
@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sSplash",
-    "path":"sprites/sSplash/sSplash.yy",
+    "name":"sSplashTop",
+    "path":"sprites/sSplashTop/sSplashTop.yy",
   },
   "spriteMaskId":null,
   "visible":true,
