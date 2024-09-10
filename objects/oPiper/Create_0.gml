@@ -1,4 +1,4 @@
-RUN_SPEED = 200;
+RUN_SPEED = 400;
 dir = 1;
 
 hasAttacked = false

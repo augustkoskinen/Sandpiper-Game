@@ -1,5 +1,6 @@
 event_inherited()
 
+var height = clamp((y-oWaveManager.DistFromTop)/(global.heightto64),0,1)*64
 var _dt = delta_time/1000000
 
 if(despawnwait==-1) {

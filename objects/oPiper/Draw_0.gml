@@ -3,7 +3,7 @@ if(attackstate == playerattackstate.hit) {
 }
 
 var _dt = delta_time/1000000
-var height = clamp((y-oWaveManager.DistFromTop)/(global.heightto32),0,1)*32
+var height = clamp((y-oWaveManager.DistFromTop)/(global.heightto64),0,1)*64
 
 var inputrl = keyboard_check(ord("D"))-keyboard_check(ord("A"))
 var inputud = keyboard_check(ord("S"))-keyboard_check(ord("W"))
@@ -53,8 +53,8 @@ if (inputud==0&&inputrl==0) {
 	
 	
 	
-	var xadd = lengthdir_x(RUN_SPEED*(height>6 ? .75 : 1)*delta_time/1000000,movedirection)
-	var yadd = lengthdir_y(RUN_SPEED*(height>6 ? .75 : 1)*delta_time/1000000,movedirection)
+	var xadd = lengthdir_x(RUN_SPEED*(height>12 ? .75 : 1)*delta_time/1000000,movedirection)
+	var yadd = lengthdir_y(RUN_SPEED*(height>12 ? .75 : 1)*delta_time/1000000,movedirection)
 
 	if(floor(legsInd) == 0) {
 		//audio_play_sound(SND_Footstep, 1, false, 1, 0, random_range(1.0, 1.6))
@@ -153,13 +153,13 @@ if(hoveringInv) {
 	var uvs = sprite_get_uvs(torsoSprite, torsoInd)
 	
 	shader_set_uniform_f(uWDpixelDims,WDtexelW,WDtexelH)
-	shader_set_uniform_f(uPercent,max(height-6,0))
+	shader_set_uniform_f(uPercent,max(height-12,0))
 	shader_set_uniform_f(_uniUV, uvs[0], uvs[1], uvs[2], uvs[3]);
 	
 	draw_sprite(torsoSprite,torsoInd,x,y);
 	shader_reset()
 	
-	if(height>1&&height<19) {
+	if(height>2&&height<40) {
 		if ((prevLegsInd!=floor(legsInd))&&splashcooldown<=0) {
 			prevLegsInd = floor(legsInd);
 			instance_create_depth(x,y-height+1,-(y-height+1)+20,oWaterSplashTop);
@@ -183,11 +183,11 @@ if(hoveringInv) {
 		}
 	}
 }
-torsoInd+=_dt*sprite_get_speed(torsoSprite)*(height>6 ? .75 : 1)
+torsoInd+=_dt*sprite_get_speed(torsoSprite)*(height>12 ? .75 : 1)
 if(torsoInd>=sprite_get_number(torsoSprite)) 
 	torsoInd = 0;
 	
-legsInd+=_dt*sprite_get_speed(legsSprite)*(height>6 ? .75 : 1)
+legsInd+=_dt*sprite_get_speed(legsSprite)*(height>12 ? .75 : 1)
 if(legsInd>=sprite_get_number(legsSprite)) 
 	legsInd = 0;
 	
@@ -198,11 +198,11 @@ if((floor(torsoInd)==2 || floor(torsoInd)==3) && hitcooldown<=0 && attackstate =
 } else if(hitcooldown>0 && torsoInd >= 4) hitcooldown-=_dt*sprite_get_speed(torsoSprite)
 
 if(attackstate==playerattackstate.hit) {
-	var hitx = dir==1 ? x+9 : x-9
-	var hity = y-3
+	var hitx = dir==1 ? x+18 : x-18
+	var hity = y-6
 	
 	var attackcollist = ds_list_create()
-	collision_circle_list(hitx,hity,12,all,true,true,attackcollist,false);
+	collision_circle_list(hitx,hity,24,all,true,true,attackcollist,false);
 	
 	for(var i = 0; i < ds_list_size(attackcollist); i++) {
 		var col = ds_list_find_value(attackcollist,i);

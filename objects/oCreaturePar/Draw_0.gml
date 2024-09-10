@@ -1,4 +1,4 @@
-var height = clamp((y-oWaveManager.DistFromTop)/(global.heightto32),0,1)*32
+var height = clamp((y-oWaveManager.DistFromTop)/(global.heightto64),0,1)*64
 
 shader_set(sWaterDraw)
 WDtexelW = texture_get_texel_width(sprite_get_texture(sprite_index,image_index))

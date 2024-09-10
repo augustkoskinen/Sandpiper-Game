@@ -9,8 +9,7 @@
   "name":"oCrab",
   "overriddenProperties":[
     {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oCreaturePar","path":"objects/oCreaturePar/oCreaturePar.yy",},"propertyId":{"name":"hp","path":"objects/oCreaturePar/oCreaturePar.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"3",},
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oCreaturePar","path":"objects/oCreaturePar/oCreaturePar.yy",},"propertyId":{"name":"depthmin","path":"objects/oCreaturePar/oCreaturePar.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"0",},
-    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oCreaturePar","path":"objects/oCreaturePar/oCreaturePar.yy",},"propertyId":{"name":"depthmax","path":"objects/oCreaturePar/oCreaturePar.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"2",},
+    {"$GMOverriddenProperty":"v1","%Name":"","name":"","objectId":{"name":"oCreaturePar","path":"objects/oCreaturePar/oCreaturePar.yy",},"propertyId":{"name":"heightmax","path":"objects/oCreaturePar/oCreaturePar.yy",},"resourceType":"GMOverriddenProperty","resourceVersion":"2.0","value":"9",},
   ],
   "parent":{
     "name":"Creatures",

@@ -18,4 +18,4 @@ part_emitter_region(global.psystem, global.bloodpsem, x,x,y,y, ps_shape_ellipse,
 part_emitter_relative(global.psystem, global.bloodpsem, true);
 part_emitter_stream(global.psystem, global.bloodpsem, global.bloodps, 5);
 
-global.heightto32 = 32*16*2;
+global.heightto64 = 64*32;

@@ -2,9 +2,9 @@
   "$GMSprite":"",
   "%Name":"sSand",
   "bboxMode":0,
-  "bbox_bottom":31,
-  "bbox_left":32,
-  "bbox_right":63,
+  "bbox_bottom":63,
+  "bbox_left":64,
+  "bbox_right":255,
   "bbox_top":0,
   "collisionKind":1,
   "collisionTolerance":0,
@@ -16,7 +16,7 @@
   ],
   "gridX":0,
   "gridY":0,
-  "height":32,
+  "height":64,
   "HTile":false,
   "layers":[
     {"$GMImageLayer":"","%Name":"f9c0546b-2974-4ffb-83d0-aa2a36908c4d","blendMode":0,"displayName":"default","isLocked":false,"name":"f9c0546b-2974-4ffb-83d0-aa2a36908c4d","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
@@ -86,5 +86,5 @@
   },
   "type":0,
   "VTile":false,
-  "width":64,
+  "width":256,
 }
