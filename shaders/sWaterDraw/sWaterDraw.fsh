@@ -13,7 +13,7 @@ void main()
 {
 	vec4 Color = v_vColour*texture2D( gm_BaseTexture, v_vTexcoord );
 	
-	float endy = 0;
+	float endy = 0.0;
 	for(float j = v_vTexcoord.y; j <= 1; j+=texture_Pixel.y) {
 		bool allblank = true;
 		for(float i = u_uv[0]; i < u_uv[2]; i+=texture_Pixel.x) {

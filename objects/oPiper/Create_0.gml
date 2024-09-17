@@ -12,6 +12,7 @@ torsoSprite = noone;
 torsoInd = 0;
 legsSprite = noone;
 legsInd = 0;
+curInd = 0;
 prevLegsInd = 0;
 
 curdamage = 1;
@@ -24,6 +25,7 @@ chargeMax = 0;
 rippletick = 0;
 ripplecooldown = 0;
 splashcooldown = 0;
+
 
 uPercent = shader_get_uniform(sWaterDraw,"uHeight")
 uWDpixelDims = shader_get_uniform(sWaterDraw,"texture_Pixel")

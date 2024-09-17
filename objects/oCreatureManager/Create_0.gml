@@ -1,1 +1,1 @@
-createCreature(0,100,100);
+createCreature(0,200,200);

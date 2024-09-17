@@ -44,7 +44,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.8.0.169",
+    "IDEVersion":"2024.8.1.171",
   },
   "name":"Sandpiper Rogue-Like",
   "resources":[
@@ -59,6 +59,7 @@
     {"id":{"name":"oDepth","path":"objects/oDepth/oDepth.yy",},},
     {"id":{"name":"oFood","path":"objects/oFood/oFood.yy",},},
     {"id":{"name":"oFoodManager","path":"objects/oFoodManager/oFoodManager.yy",},},
+    {"id":{"name":"oFootPrint","path":"objects/oFootPrint/oFootPrint.yy",},},
     {"id":{"name":"oGameManager","path":"objects/oGameManager/oGameManager.yy",},},
     {"id":{"name":"oItem","path":"objects/oItem/oItem.yy",},},
     {"id":{"name":"oPiper","path":"objects/oPiper/oPiper.yy",},},
@@ -87,6 +88,7 @@
     {"id":{"name":"sDepths","path":"sprites/sDepths/sDepths.yy",},},
     {"id":{"name":"sFishSwimR","path":"sprites/sFishSwimR/sFishSwimR.yy",},},
     {"id":{"name":"sFood","path":"sprites/sFood/sFood.yy",},},
+    {"id":{"name":"sFootPrint","path":"sprites/sFootPrint/sFootPrint.yy",},},
     {"id":{"name":"sItem","path":"sprites/sItem/sItem.yy",},},
     {"id":{"name":"sItemHold","path":"sprites/sItemHold/sItemHold.yy",},},
     {"id":{"name":"sItemSand","path":"sprites/sItemSand/sItemSand.yy",},},

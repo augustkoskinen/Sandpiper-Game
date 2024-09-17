@@ -10,7 +10,7 @@ var inputud = keyboard_check(ord("S"))-keyboard_check(ord("W"))
 
 var movedirection = round(point_direction(0,0,inputrl,inputud))
 
-dsList = ds_list_create();
+var dsList = ds_list_create();
 curDepth = collision_rectangle_list(bbox_left, bbox_top, bbox_right, bbox_bottom, oWavePar, false, true, dsList, false);
 
 if (inputud==0&&inputrl==0) {
@@ -69,14 +69,14 @@ var hoverfood = (collision_point(mouse_x,mouse_y,oFood,true,false))
 if(hoverfood!=noone && !hoverfood.edible) hoverfood = noone;
 var hoveringInv = false;
 
-if(dragitem!=noone&&place_meeting(x,y,dragitem))
+if(dragitem!=noone&&collision_rectangle_list(bbox_left, bbox_top, bbox_right, bbox_bottom, dragitem, false, true, ds_list_create(), false))
 	hoveringInv = true;
 
 if(mouse_check_button(mb_left)) {
-    if(dragitem==noone&&hoveritem!=noone && hoveritem.state==foodState.dropped) {
+    if(dragitem==noone&&hoveritem!=noone && hoveritem.state==foodState.dropped&&mouse_check_button_pressed(mb_left)) {
         dragitem = hoveritem
         hoveritem.drag();
-    } else if(dragitem==noone&&hoverfood!=noone && hoverfood.state==itemState.dropped) {
+    } else if(dragitem==noone&&hoverfood!=noone && hoverfood.state==itemState.dropped&&mouse_check_button_pressed(mb_left)) {
         dragitem = hoverfood;
         hoverfood.drag();
     } else if(!dragitem&&attackstate!=playerattackstate.celebrating) {
@@ -102,8 +102,6 @@ if(mouse_check_button(mb_left)) {
 			} 
 		}
 	}
-
-	//attackstate = playerattackstate.idle
 }
 
 
@@ -122,6 +120,146 @@ if(attackstate == playerattackstate.attacking) {
 
 depth = -y
 
+if(array_length(slots)!=0&&array_get(slots,0)!=-1) {
+	if(attackstate==playerattackstate.idle)
+		draw_sprite_ext(sItemHold,array_get(slots,0), x+(28*dir),y-(state==playerstate.running ? 23 : 31),dir,1,dir*45,c_white,1)
+	else if(attackstate==playerattackstate.attacking) {
+		switch(floor(torsoInd)) {
+			case 0: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(28*dir),y-31,dir,1,dir*45,c_white,1)
+				break;
+			}
+			case 1: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(23*dir),y-19,dir,1,dir*45,c_white,1)
+				break;
+			}
+			case 2: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(22*dir),y-13,dir,1,-dir*20,c_white,1)
+				break;
+			}
+			case 3: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(22*dir),y-2,dir,1,-dir*45,c_white,1)
+				break;
+			}
+			case 4: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(28*dir),y-31,dir,1,dir*45,c_white,1)
+				break;
+			}
+			case 5: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(28*dir),y-31,dir,1,dir*45,c_white,1)
+				break;
+			}
+			case 6: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(28*dir),y-31,dir,1,dir*45,c_white,1)
+				break;
+			}
+			case 7: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(28*dir),y-31,dir,1,dir*45,c_white,1)
+				break;
+			}
+			case 8: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(28*dir),y-31,dir,1,dir*45,c_white,1)
+				break;
+			}
+			case 9: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(28*dir),y-31,dir,1,dir*45,c_white,1)
+				break;
+			}
+			case 10: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(28*dir),y-31,dir,1,dir*45,c_white,1)
+				break;
+			}
+			case 11: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(28*dir),y-31,dir,1,dir*45,c_white,1)
+				break;
+			}
+			case 12: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(28*dir),y-31,dir,1,dir*45,c_white,1)
+				break;
+			}
+		}
+	} else if(attackstate==playerattackstate.celebrating) {
+		switch(floor(torsoInd)) {
+			case 0: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(28*dir),y-31,dir,1,dir*45,c_white,1)
+				break;
+			}
+			case 1: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(19*dir),y-46,dir,1,dir*90,c_white,1)
+				break;
+			}
+			case 2: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-51,dir,1,dir*135,c_white,1)
+				break;
+			}
+			case 3: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-53,dir,1,dir*135,c_white,1)
+				break;
+			}
+			case 4: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-53,dir,1,dir*135,c_white,1)
+				break;
+			}
+			case 5: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-51,dir,1,dir*135,c_white,1)
+				break;
+			}
+			case 6: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-51,dir,1,dir*135,c_white,1)
+				break;
+			}
+			case 7: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-53,dir,1,dir*135,c_white,1)
+				break;
+			}
+			case 8: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-53,dir,1,dir*135,c_white,1)
+				break;
+			}
+			case 9: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-51,dir,1,dir*135,c_white,1)
+				break;
+			}
+			case 10: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-51,dir,1,dir*135,c_white,1)
+				break;
+			}
+			case 11: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-53,dir,1,dir*135,c_white,1)
+				break;
+			}
+			case 12: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-53,dir,1,dir*135,c_white,1)
+				break;
+			}
+			case 13: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-51,dir,1,dir*135,c_white,1)
+				break;
+			}
+			case 14: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-51,dir,1,dir*135,c_white,1)
+				break;
+			}
+			case 15: {
+				draw_sprite_ext(sItemHold,array_get(slots,0), x+(19*dir),y-46,dir,1,dir*90,c_white,1)
+				break;
+			}
+		}
+	}
+}
+
+if(state==playerstate.running&&(ceil(legsInd-1) mod 3) == 0&&curInd!=ceil(legsInd)) {
+	curInd = ceil(legsInd);
+	var inst = noone;
+	if(ceil(legsInd-1)==0||ceil(legsInd-1)==6) {
+		inst = instance_create_layer(x,y,"FootPrint",oFootPrint)
+	} else if (ceil(legsInd-1)==3){
+		inst = instance_create_layer(x,y+2,"FootPrint",oFootPrint)
+	}
+	if(inst!=noone)
+		inst.image_xscale = -dir;
+}
+
 if(hoveringInv) {
 	shader_set(sWhiteOutline)
 	texelW = texture_get_texel_width(sprite_get_texture(legsSprite,legsInd))
@@ -136,7 +274,6 @@ if(hoveringInv) {
 	
 	shader_reset();
 } else {
-	
 	shader_set(sWaterDraw)
 	WDtexelW = texture_get_texel_width(sprite_get_texture(legsSprite,legsInd))
 	WDtexelH = texture_get_texel_height(sprite_get_texture(legsSprite,legsInd))
@@ -209,7 +346,7 @@ if(attackstate==playerattackstate.hit) {
 		if(object_get_parent(col.object_index)==oBossPar) {
 			col.takeDamage();
 			break;
-		} else if(object_get_parent(col.object_index)==oCreaturePar) {
+		} else if(object_get_parent(col.object_index)==oCreaturePar&&col.despawnwait==-1) {
 			col.takeDamage();
 			break;
 		} else if(col.object_index==oItem) {
