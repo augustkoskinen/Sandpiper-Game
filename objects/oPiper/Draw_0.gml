@@ -1,3 +1,6 @@
+var hitx = dir==1 ? x+18 : x-18
+var hity = y-6
+
 if(attackstate == playerattackstate.hit) {
 	attackstate = playerattackstate.attacking
 }
@@ -329,15 +332,12 @@ if(legsInd>=sprite_get_number(legsSprite))
 	legsInd = 0;
 	
 if((floor(torsoInd)==2 || floor(torsoInd)==3) && hitcooldown<=0 && attackstate == playerattackstate.attacking) {
-	attackstate = playerattackstate.hit
 	hasAttacked = true;
 	hitcooldown = 1;
+	attackstate = playerattackstate.hit
 } else if(hitcooldown>0 && torsoInd >= 4) hitcooldown-=_dt*sprite_get_speed(torsoSprite)
 
 if(attackstate==playerattackstate.hit) {
-	var hitx = dir==1 ? x+18 : x-18
-	var hity = y-6
-	
 	var attackcollist = ds_list_create()
 	collision_circle_list(hitx,hity,24,all,true,true,attackcollist,false);
 	
@@ -352,6 +352,8 @@ if(attackstate==playerattackstate.hit) {
 		} else if(col.object_index==oItem) {
 			col.digOut()
 			break;
+		} else if(irandom_range(1,array_length(slots)==0 ? 10 : (array_get(slots,0)==0 ? 5 : 10))==1) {
+			createFood(irandom_range(0,1),hitx,hity,irandom_range(50,70))
 		}
 	}
 }

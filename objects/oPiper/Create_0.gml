@@ -7,7 +7,6 @@ hitcooldown = 0;
 
 curDepth = 0;
 
-
 torsoSprite = noone;
 torsoInd = 0;
 legsSprite = noone;

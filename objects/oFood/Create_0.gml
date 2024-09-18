@@ -8,7 +8,7 @@ edible = true;
 pixelDims = shader_get_uniform(sWhiteOutline,"texture_Pixel")
 
 vely = 0;
-jumpadd = 0;
+jumpadd = 4.5;
 gravy = -.4;
 yadd = 0;
 
