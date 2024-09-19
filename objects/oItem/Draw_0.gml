@@ -14,12 +14,14 @@ if(state==itemState.picked) {
 	hovering = true;
 	x = mouse_x;
 	y = mouse_y;
+    sprite_index = sItem
+    image_index = type
 }
 
 if(hovering) {
 	shader_set(sWhiteOutline)
-	texelW = texture_get_texel_width(sprite_get_texture(sprite_index,type))
-	texelH = texture_get_texel_height(sprite_get_texture(sprite_index,type))
+	var texelW = texture_get_texel_width(sprite_get_texture(sprite_index,type))
+	var texelH = texture_get_texel_height(sprite_get_texture(sprite_index,type))
 	shader_set_uniform_f(pixelDims,texelW,texelH)
 	
 	draw_sprite(sprite_index,image_index,x,y-yadd)

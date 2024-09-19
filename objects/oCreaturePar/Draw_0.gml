@@ -1,8 +1,8 @@
 var height = clamp((y-oWaveManager.DistFromTop)/(global.heightto64),0,1)*64
 
 shader_set(sWaterDraw)
-WDtexelW = texture_get_texel_width(sprite_get_texture(sprite_index,image_index))
-WDtexelH = texture_get_texel_height(sprite_get_texture(sprite_index,image_index))
+var WDtexelW = texture_get_texel_width(sprite_get_texture(sprite_index,image_index))
+var WDtexelH = texture_get_texel_height(sprite_get_texture(sprite_index,image_index))
 var uvs = sprite_get_uvs(sprite_index, image_index)
 	
 shader_set_uniform_f(uPercent,height)

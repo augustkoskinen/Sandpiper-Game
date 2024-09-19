@@ -17,7 +17,7 @@ void main()
 	for(float j = v_vTexcoord.y; j <= 1; j+=texture_Pixel.y) {
 		bool allblank = true;
 		for(float i = u_uv[0]; i < u_uv[2]; i+=texture_Pixel.x) {
-			if(texture2D(gm_BaseTexture,vec2(i,j)).a!=0)
+			if(texture2D(gm_BaseTexture,vec2(i,j)).a!=0.0)
 				allblank = false;
 		}
 		

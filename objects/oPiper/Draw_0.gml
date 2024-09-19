@@ -265,8 +265,8 @@ if(state==playerstate.running&&(ceil(legsInd-1) mod 3) == 0&&curInd!=ceil(legsIn
 
 if(hoveringInv) {
 	shader_set(sWhiteOutline)
-	texelW = texture_get_texel_width(sprite_get_texture(legsSprite,legsInd))
-	texelH = texture_get_texel_height(sprite_get_texture(legsSprite,legsInd))
+	var texelW = texture_get_texel_width(sprite_get_texture(legsSprite,legsInd))
+	var texelH = texture_get_texel_height(sprite_get_texture(legsSprite,legsInd))
 	shader_set_uniform_f(pixelDims,texelW,texelH)
 	draw_sprite(legsSprite,legsInd,x,y);
 	
@@ -278,8 +278,8 @@ if(hoveringInv) {
 	shader_reset();
 } else {
 	shader_set(sWaterDraw)
-	WDtexelW = texture_get_texel_width(sprite_get_texture(legsSprite,legsInd))
-	WDtexelH = texture_get_texel_height(sprite_get_texture(legsSprite,legsInd))
+	var WDtexelW = texture_get_texel_width(sprite_get_texture(legsSprite,legsInd))
+	var WDtexelH = texture_get_texel_height(sprite_get_texture(legsSprite,legsInd))
 	var uvs = sprite_get_uvs(legsSprite, legsInd)
 	
 	shader_set_uniform_f(uWDpixelDims,WDtexelW,WDtexelH)
@@ -290,7 +290,7 @@ if(hoveringInv) {
 	
 	WDtexelW = texture_get_texel_width(sprite_get_texture(torsoSprite,torsoInd))
 	WDtexelH = texture_get_texel_height(sprite_get_texture(torsoSprite,torsoInd))
-	var uvs = sprite_get_uvs(torsoSprite, torsoInd)
+	uvs = sprite_get_uvs(torsoSprite, torsoInd)
 	
 	shader_set_uniform_f(uWDpixelDims,WDtexelW,WDtexelH)
 	shader_set_uniform_f(uPercent,max(height-12,0))

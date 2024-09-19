@@ -16,8 +16,8 @@ depth = -y
 
 if(hovering&&edible) {
 	shader_set(sWhiteOutline)
-	texelW = texture_get_texel_width(sprite_get_texture(sprite_index,image_index))
-	texelH = texture_get_texel_height(sprite_get_texture(sprite_index,image_index))
+	var texelW = texture_get_texel_width(sprite_get_texture(sprite_index,image_index))
+	var texelH = texture_get_texel_height(sprite_get_texture(sprite_index,image_index))
 	shader_set_uniform_f(pixelDims,texelW,texelH)
 	
 	draw_sprite_ext(sprite_index,image_index,x,y-yadd,1,1,direction,c_white,min(life-lifecount,1))
