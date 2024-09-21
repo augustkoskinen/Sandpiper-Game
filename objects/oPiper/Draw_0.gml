@@ -1,3 +1,5 @@
+//array_get(slots,0)!=noone&&array_get(slots,0).type==2
+
 var hitx = dir==1 ? x+18 : x-18
 var hity = y-6
 
@@ -62,11 +64,87 @@ if (inputud==0&&inputrl==0) {
 	if(floor(legsInd) == 0) {
 		//audio_play_sound(SND_Footstep, 1, false, 1, 0, random_range(1.0, 1.6))
 	}
-
+	
+	if(keyboard_check_pressed(vk_shift)&&stamina>=3&&array_get(slots,0)!=noone&&array_get(slots,0).type==4) {
+		dashvelx = lengthdir_x(DASH_SPEED*(height>12 ? .75 : 1)*delta_time/1000000,movedirection)
+		dashvely = lengthdir_y(DASH_SPEED*(height>12 ? .75 : 1)*delta_time/1000000,movedirection)
+		stamina-=3;
+		dashtime = .05;
+	}
+	
 	x+=xadd
 	y+=yadd
+	
+	if(dashtime > 0) {
+		x+=dashvelx
+		y+=dashvely
+	}
 }
 
+//determine item positioning
+var xadd = (28*dir);
+var yadd = -(state==playerstate.running ? 23 : 31);
+var itemdir = 0;
+if(attackstate==playerattackstate.attacking) {
+	yadd = -31;
+	switch(floor(torsoInd)) {
+		case 1: {
+			xadd = (23*dir)
+			yadd = -19
+			itemdir = -dir*45
+			break;
+		}
+		case 2: {
+			xadd = (22*dir)
+			yadd = -13
+			itemdir = -dir*65
+			break;
+		}
+		case 3: {
+			xadd = (22*dir)
+			yadd = -2
+			itemdir = -dir*90
+			break;
+		}
+	}
+} else if(attackstate==playerattackstate.celebrating) {
+	yadd = -31;
+	switch(floor(torsoInd)) {
+		case 15:
+		case 1: {
+			xadd = (19*dir)
+			yadd = -46
+			itemdir = dir*45
+			break;
+		}
+		case 13:
+		case 14:
+		case 9:
+		case 10:
+		case 5:
+		case 6:
+		case 2: {
+			xadd = (6*dir)
+			yadd = -51
+			itemdir = dir*90
+			break;
+		}
+		case 11: 
+		case 12: 
+		case 7: 
+		case 8: 
+		case 4:
+		case 3: {
+			xadd = (6*dir)
+			yadd = -53
+			itemdir = dir*90
+			break;
+		}
+	}
+}
+	
+var hoverequipeditem = point_in_circle(mouse_x,mouse_y,x+xadd,y+yadd,16)
+var hoverhelditem = point_in_circle(mouse_x,mouse_y,x-5*dir,y-(state==playerstate.running ? 23 : 25),16);
 var hoveritem = (collision_point(mouse_x,mouse_y,oItem,true,false))
 var hoverfood = (collision_point(mouse_x,mouse_y,oFood,true,false))
 if(hoverfood!=noone && !hoverfood.edible) hoverfood = noone;
@@ -74,12 +152,19 @@ var hoveringInv = false;
 
 if(dragitem!=noone&&collision_rectangle_list(bbox_left, bbox_top, bbox_right, bbox_bottom, dragitem, false, true, ds_list_create(), false))
 	hoveringInv = true;
-
 if(mouse_check_button(mb_left)) {
-    if(dragitem==noone&&hoveritem!=noone && hoveritem.state==foodState.dropped&&mouse_check_button_pressed(mb_left)) {
+	if(array_get(slots,1)!=noone&&hoverhelditem&&mouse_check_button_pressed(mb_left)) {
+		dragitem = array_get(slots,1)
+		array_get(slots,1).drag(1);
+		array_set(slots,1,noone);
+	} else if(array_get(slots,0)!=noone&&hoverequipeditem&&mouse_check_button_pressed(mb_left)) {
+		dragitem = array_get(slots,0)
+		array_get(slots,0).drag(0);
+		array_set(slots,0,noone);
+	} else if(dragitem==noone&&hoveritem!=noone && hoveritem.state==itemState.dropped&&mouse_check_button_pressed(mb_left)) {
         dragitem = hoveritem
         hoveritem.drag();
-    } else if(dragitem==noone&&hoverfood!=noone && hoverfood.state==itemState.dropped&&mouse_check_button_pressed(mb_left)) {
+    } else if(dragitem==noone&&hoverfood!=noone && hoverfood.state==foodState.dropped&&mouse_check_button_pressed(mb_left)) {
         dragitem = hoverfood;
         hoverfood.drag();
     } else if(!dragitem&&attackstate!=playerattackstate.celebrating) {
@@ -88,7 +173,33 @@ if(mouse_check_button(mb_left)) {
 } else {
 	if(dragitem) {
 		if(dragitem.object_index == oItem) {
-			if(hoveringInv) {
+			var equipitem = array_get(slots,0)
+			var helditem = array_get(slots,1)
+			if(hoverequipeditem&&equipitem!=noone) {
+				if(dragitem.fromslot!=-1) {
+					dragitem.fromslot = -1;
+					array_set(slots,1,equipitem)
+					array_set(slots,0,noone)
+					dragitem.pickUp(0);
+				} else {
+					equipitem.drop(mouse_x,mouse_y);
+					array_set(slots,0,noone)
+					dragitem.pickUp(0);
+				}
+				dragitem = noone;
+			} else if(hoverhelditem&&helditem!=noone) {
+				if(dragitem.fromslot!=-1) {
+					dragitem.fromslot = -1;
+					array_set(slots,0,helditem)
+					array_set(slots,1,noone)
+					dragitem.pickUp(1);
+				} else {
+					helditem.drop(mouse_x,mouse_y);
+					array_set(slots,1,noone)
+					dragitem.pickUp(1);
+				}
+				dragitem = noone;
+			} else if(hoveringInv) {
 				dragitem.pickUp();
 				dragitem = noone;
 			} else {
@@ -123,132 +234,15 @@ if(attackstate == playerattackstate.attacking) {
 
 depth = -y
 
-if(array_length(slots)!=0&&array_get(slots,0)!=-1) {
-	if(attackstate==playerattackstate.idle)
-		draw_sprite_ext(sItemHold,array_get(slots,0), x+(28*dir),y-(state==playerstate.running ? 23 : 31),dir,1,dir*45,c_white,1)
-	else if(attackstate==playerattackstate.attacking) {
-		switch(floor(torsoInd)) {
-			case 0: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(28*dir),y-31,dir,1,dir*45,c_white,1)
-				break;
-			}
-			case 1: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(23*dir),y-19,dir,1,dir*45,c_white,1)
-				break;
-			}
-			case 2: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(22*dir),y-13,dir,1,-dir*20,c_white,1)
-				break;
-			}
-			case 3: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(22*dir),y-2,dir,1,-dir*45,c_white,1)
-				break;
-			}
-			case 4: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(28*dir),y-31,dir,1,dir*45,c_white,1)
-				break;
-			}
-			case 5: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(28*dir),y-31,dir,1,dir*45,c_white,1)
-				break;
-			}
-			case 6: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(28*dir),y-31,dir,1,dir*45,c_white,1)
-				break;
-			}
-			case 7: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(28*dir),y-31,dir,1,dir*45,c_white,1)
-				break;
-			}
-			case 8: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(28*dir),y-31,dir,1,dir*45,c_white,1)
-				break;
-			}
-			case 9: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(28*dir),y-31,dir,1,dir*45,c_white,1)
-				break;
-			}
-			case 10: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(28*dir),y-31,dir,1,dir*45,c_white,1)
-				break;
-			}
-			case 11: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(28*dir),y-31,dir,1,dir*45,c_white,1)
-				break;
-			}
-			case 12: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(28*dir),y-31,dir,1,dir*45,c_white,1)
-				break;
-			}
-		}
-	} else if(attackstate==playerattackstate.celebrating) {
-		switch(floor(torsoInd)) {
-			case 0: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(28*dir),y-31,dir,1,dir*45,c_white,1)
-				break;
-			}
-			case 1: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(19*dir),y-46,dir,1,dir*90,c_white,1)
-				break;
-			}
-			case 2: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-51,dir,1,dir*135,c_white,1)
-				break;
-			}
-			case 3: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-53,dir,1,dir*135,c_white,1)
-				break;
-			}
-			case 4: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-53,dir,1,dir*135,c_white,1)
-				break;
-			}
-			case 5: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-51,dir,1,dir*135,c_white,1)
-				break;
-			}
-			case 6: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-51,dir,1,dir*135,c_white,1)
-				break;
-			}
-			case 7: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-53,dir,1,dir*135,c_white,1)
-				break;
-			}
-			case 8: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-53,dir,1,dir*135,c_white,1)
-				break;
-			}
-			case 9: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-51,dir,1,dir*135,c_white,1)
-				break;
-			}
-			case 10: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-51,dir,1,dir*135,c_white,1)
-				break;
-			}
-			case 11: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-53,dir,1,dir*135,c_white,1)
-				break;
-			}
-			case 12: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-53,dir,1,dir*135,c_white,1)
-				break;
-			}
-			case 13: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-51,dir,1,dir*135,c_white,1)
-				break;
-			}
-			case 14: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(6*dir),y-51,dir,1,dir*135,c_white,1)
-				break;
-			}
-			case 15: {
-				draw_sprite_ext(sItemHold,array_get(slots,0), x+(19*dir),y-46,dir,1,dir*90,c_white,1)
-				break;
-			}
-		}
+if(array_get(slots,0)!=noone) {
+	if(hoverequipeditem) {
+		shader_set(sWhiteOutline)
+		var texelW = texture_get_texel_width(sprite_get_texture(sItemHold,array_get(slots,0).type))
+		var texelH = texture_get_texel_height(sprite_get_texture(sItemHold,array_get(slots,0).type))
+		shader_set_uniform_f(pixelDims,texelW,texelH)
 	}
+	draw_sprite_ext(sItemHold,array_get(slots,0).type, x+xadd,y+yadd,dir,1,itemdir,c_white,1)
+	shader_reset();
 }
 
 if(state==playerstate.running&&(ceil(legsInd-1) mod 3) == 0&&curInd!=ceil(legsInd)) {
@@ -323,11 +317,28 @@ if(hoveringInv) {
 		}
 	}
 }
-torsoInd+=_dt*sprite_get_speed(torsoSprite)*(height>12 ? .75 : 1)
+if(array_get(slots,1)!=noone) {
+	if(hoverhelditem) {
+		shader_set(sWhiteOutline)
+		var texelW = texture_get_texel_width(sprite_get_texture(sItemHold,array_get(slots,1).type))
+		var texelH = texture_get_texel_height(sprite_get_texture(sItemHold,array_get(slots,1).type))
+		shader_set_uniform_f(pixelDims,texelW,texelH)
+	}
+	draw_sprite_ext(sItemHold,array_get(slots,1).type, x-5*dir,y-(state==playerstate.running ? 23 : 25),dir,1,0,c_white,1)
+	shader_reset();
+}
+
+
+
+if(array_get(slots,0)!=noone&&array_get(slots,0).type==2)
+	attackspeed = 1.125;
+else 
+	attackspeed = 1.0;
+torsoInd+=_dt*sprite_get_speed(torsoSprite)*(height>12 ? .75 : 1)*attackspeed
 if(torsoInd>=sprite_get_number(torsoSprite)) 
 	torsoInd = 0;
 	
-legsInd+=_dt*sprite_get_speed(legsSprite)*(height>12 ? .75 : 1)
+legsInd+=_dt*sprite_get_speed(legsSprite)*(height>12 ? .75 : 1)*(dashtime>0 ? DASH_SPEED/RUN_SPEED : 1)
 if(legsInd>=sprite_get_number(legsSprite)) 
 	legsInd = 0;
 	
@@ -352,7 +363,7 @@ if(attackstate==playerattackstate.hit) {
 		} else if(col.object_index==oItem) {
 			col.digOut()
 			break;
-		} else if(irandom_range(1,array_length(slots)==0 ? 10 : (array_get(slots,0)==0 ? 5 : 10))==1) {
+		} else if(irandom_range(1,array_get(slots,0)==noone ? 10 : (array_get(slots,0).type==0 ? 5 : 10))==1) {
 			createFood(irandom_range(0,1),hitx,hity,irandom_range(50,70))
 		}
 	}
@@ -367,3 +378,11 @@ if(attackstate==playerattackstate.celebrating&&celebratedchange&&floor(torsoInd)
 	
 splashcooldown-=_dt;
 ripplecooldown-=_dt;
+
+if(dashtime > 0)
+	dashtime-=_dt
+
+if(stamina<10)
+	stamina+=_dt;
+else 
+	stamina = 10;

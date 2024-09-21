@@ -1,5 +1,9 @@
 RUN_SPEED = 400;
+DASH_SPEED = 2000;
 dir = 1;
+dashvelx = 0;
+dashvely = 0;
+dashtime = 0;
 
 hasAttacked = false
 
@@ -14,6 +18,7 @@ legsInd = 0;
 curInd = 0;
 prevLegsInd = 0;
 
+attackspeed = 1.0;
 curdamage = 1;
 hp = 10;
 stamina = 10;
@@ -33,9 +38,7 @@ _uniUV = shader_get_uniform(sWaterDraw, "u_uv");
 pixelDims = shader_get_uniform(sWhiteOutline,"texture_Pixel")
 
 dragitem = noone;
-slotLength = 2;
-slots = array_create(0);
-createItem(0);
+slots = array_create(2,noone);
 
 state = playerstate.running;
 attackstate = playerattackstate.idle;

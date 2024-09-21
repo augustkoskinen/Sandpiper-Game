@@ -1,7 +1,3 @@
-//
-// Simple passthrough fragment shader
-//
-
 varying vec2 v_vTexcoord;
 varying vec4 v_vColour;
 
@@ -22,7 +18,7 @@ void main()
 		}
 		
 		if(allblank) {
-			endy = j;//-texture_Pixel.y;
+			endy = j;
 			break;
 		}
 	}

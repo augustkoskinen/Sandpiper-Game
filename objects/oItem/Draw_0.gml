@@ -17,18 +17,19 @@ if(state==itemState.picked) {
     sprite_index = sItem
     image_index = type
 }
-
-if(hovering) {
-	shader_set(sWhiteOutline)
-	var texelW = texture_get_texel_width(sprite_get_texture(sprite_index,type))
-	var texelH = texture_get_texel_height(sprite_get_texture(sprite_index,type))
-	shader_set_uniform_f(pixelDims,texelW,texelH)
+if(state!=itemState.picked) {
+	if(hovering) {
+		shader_set(sWhiteOutline)
+		var texelW = texture_get_texel_width(sprite_get_texture(sprite_index,type))
+		var texelH = texture_get_texel_height(sprite_get_texture(sprite_index,type))
+		shader_set_uniform_f(pixelDims,texelW,texelH)
 	
-	draw_sprite(sprite_index,image_index,x,y-yadd)
+		draw_sprite(sprite_index,image_index,x,y-yadd)
 	
-	shader_reset();
-} else 
-	draw_sprite(sprite_index,image_index,x,y-yadd)
+		shader_reset();
+	} else 
+		draw_sprite(sprite_index,image_index,x,y-yadd)
+}
 
 vely+=gravy
 yadd+=vely
