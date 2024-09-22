@@ -1,13 +1,13 @@
-//array_get(slots,0)!=noone&&array_get(slots,0).type==2
-
-var hitx = dir==1 ? x+18 : x-18
-var hity = y-6
-
+//resetstate
 if(attackstate == playerattackstate.hit) {
 	attackstate = playerattackstate.attacking
 }
 
+//needed vars
 var _dt = delta_time/1000000
+
+var hitx = dir==1 ? x+18 : x-18
+var hity = y-6
 var height = clamp((y-oWaveManager.DistFromTop)/(global.heightto64),0,1)*64
 
 var inputrl = keyboard_check(ord("D"))-keyboard_check(ord("A"))
@@ -15,10 +15,11 @@ var inputud = keyboard_check(ord("S"))-keyboard_check(ord("W"))
 
 var movedirection = round(point_direction(0,0,inputrl,inputud))
 
-var dsList = ds_list_create();
-curDepth = collision_rectangle_list(bbox_left, bbox_top, bbox_right, bbox_bottom, oWavePar, false, true, dsList, false);
+curDepth = collision_rectangle_list(bbox_left, bbox_top, bbox_right, bbox_bottom, oWavePar, false, true, ds_list_create(), false);
 
-if (inputud==0&&inputrl==0) {
+
+//inputs
+if (inputud==0&&inputrl==0) { //no move
 	movedirection = -1
 	splashcooldown=0;
 	if(attackstate!=playerattackstate.celebrating)
@@ -36,7 +37,7 @@ if (inputud==0&&inputrl==0) {
 			torsoSprite = sPiperTorsoL
 		legsSprite = sPiperLegsL
 	}
-} else {
+} else { //move
 	if(attackstate!=playerattackstate.celebrating)
 		state = playerstate.running
 	if(inputrl!=0)
@@ -56,8 +57,6 @@ if (inputud==0&&inputrl==0) {
 		legsSprite = sPiperLegsLW
 	}
 	
-	
-	
 	var xadd = lengthdir_x(RUN_SPEED*(height>12 ? .75 : 1)*delta_time/1000000,movedirection)
 	var yadd = lengthdir_y(RUN_SPEED*(height>12 ? .75 : 1)*delta_time/1000000,movedirection)
 
@@ -65,6 +64,7 @@ if (inputud==0&&inputrl==0) {
 		//audio_play_sound(SND_Footstep, 1, false, 1, 0, random_range(1.0, 1.6))
 	}
 	
+	//dash
 	if(keyboard_check_pressed(vk_shift)&&stamina>=3&&array_get(slots,0)!=noone&&array_get(slots,0).type==4) {
 		dashvelx = lengthdir_x(DASH_SPEED*(height>12 ? .75 : 1)*delta_time/1000000,movedirection)
 		dashvely = lengthdir_y(DASH_SPEED*(height>12 ? .75 : 1)*delta_time/1000000,movedirection)
@@ -72,6 +72,7 @@ if (inputud==0&&inputrl==0) {
 		dashtime = .05;
 	}
 	
+	//add movement
 	x+=xadd
 	y+=yadd
 	
@@ -79,6 +80,8 @@ if (inputud==0&&inputrl==0) {
 		x+=dashvelx
 		y+=dashvely
 	}
+	
+	depth = -y
 }
 
 //determine item positioning
@@ -142,18 +145,28 @@ if(attackstate==playerattackstate.attacking) {
 		}
 	}
 }
-	
+
+//mouse hovering events
 var hoverequipeditem = point_in_circle(mouse_x,mouse_y,x+xadd,y+yadd,16)
 var hoverhelditem = point_in_circle(mouse_x,mouse_y,x-5*dir,y-(state==playerstate.running ? 23 : 25),16);
 var hoveritem = (collision_point(mouse_x,mouse_y,oItem,true,false))
 var hoverfood = (collision_point(mouse_x,mouse_y,oFood,true,false))
-if(hoverfood!=noone && !hoverfood.edible) hoverfood = noone;
-var hoveringInv = false;
 
+if(hoverfood!=noone && !hoverfood.edible) hoverfood = noone;
+
+var hoveringInv = false;
 if(dragitem!=noone&&collision_rectangle_list(bbox_left, bbox_top, bbox_right, bbox_bottom, dragitem, false, true, ds_list_create(), false))
 	hoveringInv = true;
+	
+//mouse click events
 if(mouse_check_button(mb_left)) {
-	if(array_get(slots,1)!=noone&&hoverhelditem&&mouse_check_button_pressed(mb_left)) {
+	if(dragitem==noone&&hoveritem!=noone && hoveritem.state==itemState.dropped&&mouse_check_button_pressed(mb_left)) {
+        dragitem = hoveritem
+        hoveritem.drag();
+    } else if(dragitem==noone&&hoverfood!=noone && hoverfood.state==foodState.dropped&&mouse_check_button_pressed(mb_left)) {
+        dragitem = hoverfood;
+        hoverfood.drag();
+    } else if(array_get(slots,1)!=noone&&hoverhelditem&&mouse_check_button_pressed(mb_left)) {
 		dragitem = array_get(slots,1)
 		array_get(slots,1).drag(1);
 		array_set(slots,1,noone);
@@ -161,16 +174,10 @@ if(mouse_check_button(mb_left)) {
 		dragitem = array_get(slots,0)
 		array_get(slots,0).drag(0);
 		array_set(slots,0,noone);
-	} else if(dragitem==noone&&hoveritem!=noone && hoveritem.state==itemState.dropped&&mouse_check_button_pressed(mb_left)) {
-        dragitem = hoveritem
-        hoveritem.drag();
-    } else if(dragitem==noone&&hoverfood!=noone && hoverfood.state==foodState.dropped&&mouse_check_button_pressed(mb_left)) {
-        dragitem = hoverfood;
-        hoverfood.drag();
-    } else if(!dragitem&&attackstate!=playerattackstate.celebrating) {
+	} else if(!dragitem&&attackstate!=playerattackstate.celebrating) {
         attackstate = playerattackstate.attacking
 	}
-} else {
+} else {//release mouse events
 	if(dragitem) {
 		if(dragitem.object_index == oItem) {
 			var equipitem = array_get(slots,0)
@@ -218,7 +225,7 @@ if(mouse_check_button(mb_left)) {
 	}
 }
 
-
+//attack state manipulation
 if(attackstate == playerattackstate.attacking) {
 	if(dir==1) {
 		torsoSprite = sPiperTorsoRA
@@ -232,8 +239,7 @@ if(attackstate == playerattackstate.attacking) {
 	}
 }
 
-depth = -y
-
+//draw beak item
 if(array_get(slots,0)!=noone) {
 	if(hoverequipeditem) {
 		shader_set(sWhiteOutline)
@@ -245,6 +251,7 @@ if(array_get(slots,0)!=noone) {
 	shader_reset();
 }
 
+//draw footprints
 if(state==playerstate.running&&(ceil(legsInd-1) mod 3) == 0&&curInd!=ceil(legsInd)) {
 	curInd = ceil(legsInd);
 	var inst = noone;
@@ -257,7 +264,7 @@ if(state==playerstate.running&&(ceil(legsInd-1) mod 3) == 0&&curInd!=ceil(legsIn
 		inst.image_xscale = -dir;
 }
 
-if(hoveringInv) {
+if(hoveringInv&&!(hoverequipeditem&&array_get(slots,0))&&!(hoverhelditem&&array_get(slots,1))) { //draw white outline if being hovered
 	shader_set(sWhiteOutline)
 	var texelW = texture_get_texel_width(sprite_get_texture(legsSprite,legsInd))
 	var texelH = texture_get_texel_height(sprite_get_texture(legsSprite,legsInd))
@@ -270,7 +277,7 @@ if(hoveringInv) {
 	draw_sprite(torsoSprite,torsoInd,x,y);
 	
 	shader_reset();
-} else {
+} else { //draw sprite in water
 	shader_set(sWaterDraw)
 	var WDtexelW = texture_get_texel_width(sprite_get_texture(legsSprite,legsInd))
 	var WDtexelH = texture_get_texel_height(sprite_get_texture(legsSprite,legsInd))
@@ -317,6 +324,8 @@ if(hoveringInv) {
 		}
 	}
 }
+
+//draw held item
 if(array_get(slots,1)!=noone) {
 	if(hoverhelditem) {
 		shader_set(sWhiteOutline)
@@ -328,12 +337,12 @@ if(array_get(slots,1)!=noone) {
 	shader_reset();
 }
 
-
-
+//indexs for sprites
 if(array_get(slots,0)!=noone&&array_get(slots,0).type==2)
 	attackspeed = 1.125;
 else 
 	attackspeed = 1.0;
+	
 torsoInd+=_dt*sprite_get_speed(torsoSprite)*(height>12 ? .75 : 1)*attackspeed
 if(torsoInd>=sprite_get_number(torsoSprite)) 
 	torsoInd = 0;
@@ -341,16 +350,18 @@ if(torsoInd>=sprite_get_number(torsoSprite))
 legsInd+=_dt*sprite_get_speed(legsSprite)*(height>12 ? .75 : 1)*(dashtime>0 ? DASH_SPEED/RUN_SPEED : 1)
 if(legsInd>=sprite_get_number(legsSprite)) 
 	legsInd = 0;
-	
+
+//hit/attack indexes
 if((floor(torsoInd)==2 || floor(torsoInd)==3) && hitcooldown<=0 && attackstate == playerattackstate.attacking) {
 	hasAttacked = true;
 	hitcooldown = 1;
 	attackstate = playerattackstate.hit
 } else if(hitcooldown>0 && torsoInd >= 4) hitcooldown-=_dt*sprite_get_speed(torsoSprite)
 
+//check for damages
 if(attackstate==playerattackstate.hit) {
 	var attackcollist = ds_list_create()
-	collision_circle_list(hitx,hity,24,all,true,true,attackcollist,false);
+	collision_circle_list(hitx,hity,range,all,true,true,attackcollist,false);
 	
 	for(var i = 0; i < ds_list_size(attackcollist); i++) {
 		var col = ds_list_find_value(attackcollist,i);
@@ -369,6 +380,8 @@ if(attackstate==playerattackstate.hit) {
 	}
 }
 
+
+//ticks
 rippletick+=_dt*3;
 
 if(attackstate==playerattackstate.celebrating&&!celebratedchange&&floor(torsoInd)==2)

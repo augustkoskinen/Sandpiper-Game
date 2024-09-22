@@ -1,5 +1,7 @@
 var hovering = false;
 
+depth = -y;
+
 if(state==itemState.picked) {
     sprite_index = noone
 } else if(state==itemState.dropped) {
@@ -16,6 +18,7 @@ if(state==itemState.picked) {
 	y = mouse_y;
     sprite_index = sItem
     image_index = type
+	depth = -10000;
 }
 if(state!=itemState.picked) {
 	if(hovering) {
