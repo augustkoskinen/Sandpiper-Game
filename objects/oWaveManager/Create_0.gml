@@ -1,7 +1,7 @@
 DistFromTop = room_height / 6;
 waveIds = array_create(DepthCount);
 counter = current_time;
-timeTillSpawn = 4000;
+timeTillSpawn = 6000;
 
 startingdepth = 10000;
 

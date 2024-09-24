@@ -9,13 +9,13 @@ scuttleTime = 0;
 scuttlex = 0;
 scuttlexmax = 0;
 scuttlexmin = 0;
-scuttleSpeed = 200
+scuttleSpeed = 200; //200
 
 rundir = -1;
 driftTime = 0;
 driftx = 0;
 drifty = 0;
-driftSpeed = 40
+driftSpeed = 40; //40
 
 despawnwait = -1;
 
