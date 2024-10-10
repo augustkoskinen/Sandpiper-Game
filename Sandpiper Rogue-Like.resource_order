@@ -17,6 +17,9 @@
     {"name":"oCreatureManager","order":1,"path":"objects/oCreatureManager/oCreatureManager.yy",},
     {"name":"oCreaturePar","order":2,"path":"objects/oCreaturePar/oCreaturePar.yy",},
     {"name":"oFootPrint","order":3,"path":"objects/oFootPrint/oFootPrint.yy",},
+    {"name":"oGUI","order":3,"path":"objects/oGUI/oGUI.yy",},
+    {"name":"oItem","order":2,"path":"objects/oItem/oItem.yy",},
+    {"name":"oPiper","order":1,"path":"objects/oPiper/oPiper.yy",},
     {"name":"oWaterSplashBottom","order":2,"path":"objects/oWaterSplashBottom/oWaterSplashBottom.yy",},
     {"name":"oWaterSplashTop","order":1,"path":"objects/oWaterSplashTop/oWaterSplashTop.yy",},
     {"name":"sWaterDraw","order":1,"path":"shaders/sWaterDraw/sWaterDraw.yy",},
@@ -32,6 +35,7 @@
     {"name":"sSand","order":1,"path":"sprites/sSand/sSand.yy",},
     {"name":"sSplashBottom","order":3,"path":"sprites/sSplashBottom/sSplashBottom.yy",},
     {"name":"sSplashTop","order":5,"path":"sprites/sSplashTop/sSplashTop.yy",},
+    {"name":"sVignette","order":5,"path":"sprites/sVignette/sVignette.yy",},
     {"name":"sWave","order":2,"path":"sprites/sWave/sWave.yy",},
   ],
 }

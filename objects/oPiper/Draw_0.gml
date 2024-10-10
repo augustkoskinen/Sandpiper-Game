@@ -9,6 +9,10 @@ var _dt = delta_time/1000000
 var hitx = dir==1 ? x+18 : x-18
 var hity = y-6
 var height = clamp((y-oWaveManager.DistFromTop)/(global.heightto64),0,1)*64
+if(instance_place(x,y,oWave)) {
+	var wavecol = instance_place(x,y,oWave)
+	height+=clamp(8*dsin((wavecol.y+wavecol.sprite_height-y)/360*wavecol.sprite_height),0,4)
+}
 
 var inputrl = keyboard_check(ord("D"))-keyboard_check(ord("A"))
 var inputud = keyboard_check(ord("S"))-keyboard_check(ord("W"))
@@ -17,6 +21,15 @@ var movedirection = round(point_direction(0,0,inputrl,inputud))
 
 curDepth = collision_rectangle_list(bbox_left, bbox_top, bbox_right, bbox_bottom, oWavePar, false, true, ds_list_create(), false);
 
+if(height>=32) {
+	inDanger = true;
+	if(drownwait<=0)
+		drownwait = 1;
+}
+else {
+	inDanger = false;
+	drownwait = 0;
+}
 
 //inputs
 if (inputud==0&&inputrl==0) { //no move
@@ -399,3 +412,14 @@ if(stamina<10)
 	stamina+=_dt;
 else 
 	stamina = 10;
+	
+if(drownwait>0) {
+	drownwait-=_dt;
+	if(drownwait<=0) hp--;
+}
+
+if(hp<=0) {
+	x = 0;
+	y = 0;
+	hp = 3;
+}

@@ -16,6 +16,8 @@ prevLegsInd = 0;
 celebratechange = false;
 
 //damage
+drownwait = 0;
+inDanger = false;
 hasAttacked = false
 attackspeed = 1.0;
 range = 24;
@@ -23,7 +25,7 @@ curdamage = 1;
 hitcooldown = 0;
 
 //stats
-hp = 10;
+hp = 3;
 stamina = 10;
 foodPoints = 0;
 charge = 0;

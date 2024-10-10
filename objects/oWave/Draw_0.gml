@@ -7,7 +7,7 @@ switch(state){
 	case(WAVE_STATE.ROLLING_UP):
 		if(y <= room_height/6 + 400){
 			state = WAVE_STATE.WAITING;
-			show_debug_message("Waiting")
+			//show_debug_message("Waiting")
 			break;
 		}
 		break;
@@ -17,10 +17,10 @@ switch(state){
 		} else {
 			spd = 0;
 		}
-		show_debug_message(curDepth)
+		//show_debug_message(curDepth)
 		if(curDepth == 1) {
 			state = WAVE_STATE.CRASHING;
-			show_debug_message("Crashing")
+			//show_debug_message("Crashing")
 			break;
 		}
 		if(current_time - counter >= maxWaitTime) {
@@ -31,7 +31,7 @@ switch(state){
 	case(WAVE_STATE.CRASHING):
 		spd = 300;
 		if(y < room_height/6) {
-			show_debug_message("Washing out")
+			//show_debug_message("Washing out")
 			audio_play_sound(SND_WaveCrash, 1, false);
 			state = WAVE_STATE.WASHING_OUT;
 		}
@@ -41,7 +41,7 @@ switch(state){
 			spd -= 185*delta_time/1000000;
 		}
 		if(y > room_height/6 + 600) {
-			show_debug_message("poof")
+			//show_debug_message("poof")
 			instance_destroy(self, true);
 		}
 	break;
