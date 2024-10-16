@@ -8,8 +8,8 @@
   "name":"oCreatureManager",
   "overriddenProperties":[],
   "parent":{
-    "name":"Creatures",
-    "path":"folders/Objects/Creatures.yy",
+    "name":"Pars&Managers",
+    "path":"folders/Objects/Pars&Managers.yy",
   },
   "parentObjectId":null,
   "persistent":false,

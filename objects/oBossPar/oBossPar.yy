@@ -12,7 +12,10 @@
     "name":"Boss",
     "path":"folders/Objects/Boss.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"oHitablePar",
+    "path":"objects/oHitablePar/oHitablePar.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

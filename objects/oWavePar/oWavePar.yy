@@ -6,8 +6,8 @@
   "name":"oWavePar",
   "overriddenProperties":[],
   "parent":{
-    "name":"Environment",
-    "path":"folders/Objects/Environment.yy",
+    "name":"Pars&Managers",
+    "path":"folders/Objects/Pars&Managers.yy",
   },
   "parentObjectId":null,
   "persistent":false,

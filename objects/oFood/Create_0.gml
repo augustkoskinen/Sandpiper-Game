@@ -1,3 +1,5 @@
+event_inherited()
+
 life = -1;
 value = 0;
 lifecount = 0;

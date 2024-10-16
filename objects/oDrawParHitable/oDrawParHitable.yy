@@ -1,17 +1,21 @@
 {
   "$GMObject":"",
-  "%Name":"oGameManager",
+  "%Name":"oDrawParHitable",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"oGameManager",
+  "name":"oDrawParHitable",
   "overriddenProperties":[],
   "parent":{
     "name":"Pars&Managers",
     "path":"folders/Objects/Pars&Managers.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"oHitablePar",
+    "path":"objects/oHitablePar/oHitablePar.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

@@ -41,9 +41,15 @@ switch(state){
 			spd -= 185*delta_time/1000000;
 		}
 		if(y > room_height/6 + 600) {
-			//show_debug_message("poof")
+			state = WAVE_STATE.DYING
 			instance_destroy(self, true);
 		}
+	break;
+	case(WAVE_STATE.DYING):
+		if(image_alpha>0)
+			image_alpha -= delta_time/1000000;
+		else
+			instance_destroy(self, true);
 	break;
 }
 
@@ -51,4 +57,6 @@ y -= spd*delta_time/1000000;
 
 depth = -2;
 
+draw_set_alpha(image_alpha)
 draw_sprite_stretched(sprite_index,image_index,0,y,room_width,sprite_height);
+draw_set_alpha(1.0)

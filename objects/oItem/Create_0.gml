@@ -1,3 +1,5 @@
+event_inherited();
+
 state = itemState.buried;
 
 pixelDims = shader_get_uniform(sWhiteOutline,"texture_Pixel")

@@ -2,31 +2,35 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function createItem(type){
 	var item = instance_create_depth(0,0,0,oItem)
-	
 			
 	switch(type) {
 		//comb
 		case 0 : {
+			item.holdsprite = sItem0 
 			break;
 		}
 		
 		//cigarette
 		case 1 : {
+			item.holdsprite = sItem1 
 			break;
 		}
 		
 		//pointy shell
 		case 2 : {
+			item.holdsprite = sItem2 
 			break;
 		}
 		
 		//skewer
 		case 3 : {
+			item.holdsprite = sItem3
 			break;
 		}
 		
 		//bubble gun
 		case 4 : {
+			item.holdsprite = sItem4
 			break;
 		}
 		

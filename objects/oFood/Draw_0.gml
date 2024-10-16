@@ -23,8 +23,13 @@ if(hovering&&edible) {
 	draw_sprite_ext(sprite_index,image_index,x,y-yadd,1,1,direction,c_white,min(life-lifecount,1))
 	
 	shader_reset();
-} else 
-	draw_sprite_ext(sprite_index,image_index,x,y-yadd,1,1,direction,c_white,min(life-lifecount,1))
+} else {
+	drawindex = image_index
+	drawsprite = sprite_index
+	drawx = x;
+	drawy = y-yadd;
+	drawalpha = min(life-lifecount,1)
+}
 
 
 vely+=gravy
@@ -34,3 +39,5 @@ if(yadd<=0) {
     yadd = 0;
     vely = jumpadd;
 }
+if(!hovering&&edible)
+	event_inherited()

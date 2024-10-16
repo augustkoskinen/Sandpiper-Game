@@ -8,19 +8,13 @@ var _dt = delta_time/1000000
 
 var hitx = dir==1 ? x+18 : x-18
 var hity = y-6
+
+curDepth = collision_rectangle_list(bbox_left, bbox_top, bbox_right, bbox_bottom, oWavePar, false, true, ds_list_create(), false);
 var height = clamp((y-oWaveManager.DistFromTop)/(global.heightto64),0,1)*64
 if(instance_place(x,y,oWave)) {
 	var wavecol = instance_place(x,y,oWave)
-	height+=clamp(8*dsin((wavecol.y+wavecol.sprite_height-y)/360*wavecol.sprite_height),0,4)
+	height+=clamp(6*dsin((wavecol.y+wavecol.sprite_height-y)/360*wavecol.sprite_height),0,4)
 }
-
-var inputrl = keyboard_check(ord("D"))-keyboard_check(ord("A"))
-var inputud = keyboard_check(ord("S"))-keyboard_check(ord("W"))
-
-var movedirection = round(point_direction(0,0,inputrl,inputud))
-
-curDepth = collision_rectangle_list(bbox_left, bbox_top, bbox_right, bbox_bottom, oWavePar, false, true, ds_list_create(), false);
-
 if(height>=32) {
 	inDanger = true;
 	if(drownwait<=0)
@@ -30,6 +24,10 @@ else {
 	inDanger = false;
 	drownwait = 0;
 }
+
+var inputrl = keyboard_check(ord("D"))-keyboard_check(ord("A"))
+var inputud = keyboard_check(ord("S"))-keyboard_check(ord("W"))
+var movedirection = round(point_direction(0,0,inputrl,inputud))
 
 //inputs
 if (inputud==0&&inputrl==0) { //no move
@@ -245,7 +243,7 @@ if(attackstate == playerattackstate.attacking) {
 	} else {
 		torsoSprite = sPiperTorsoLA
 	}
-	hasAttacked = true
+	
 	if(hasAttacked == true && floor(torsoInd) >= 9) {
 		attackstate = playerattackstate.idle;
 		hasAttacked = false
@@ -256,11 +254,26 @@ if(attackstate == playerattackstate.attacking) {
 if(array_get(slots,0)!=noone) {
 	if(hoverequipeditem) {
 		shader_set(sWhiteOutline)
-		var texelW = texture_get_texel_width(sprite_get_texture(sItemHold,array_get(slots,0).type))
-		var texelH = texture_get_texel_height(sprite_get_texture(sItemHold,array_get(slots,0).type))
+		var texelW = texture_get_texel_width(sprite_get_texture(array_get(slots,0).holdsprite,array_get(slots,0).type))
+		var texelH = texture_get_texel_height(sprite_get_texture(array_get(slots,0).holdsprite,array_get(slots,0).type))
 		shader_set_uniform_f(pixelDims,texelW,texelH)
+	} else {
+		shader_set(sWaterDraw)
+
+		sprite_index = array_get(slots,0).holdsprite
+		WDtexelW = texture_get_texel_width(sprite_get_texture(array_get(slots,0).holdsprite,array_get(slots,0).type))
+		WDtexelH = texture_get_texel_height(sprite_get_texture(array_get(slots,0).holdsprite,array_get(slots,0).type))
+		uvs = sprite_get_uvs(array_get(slots,0).holdsprite,array_get(slots,0).type)
+	
+		shader_set_uniform_f(uWDpixelDims,WDtexelW,WDtexelH)
+		shader_set_uniform_f(uPercent,clamp(height+yadd+(bbox_bottom-bbox_top)/2-2,0,max(height,0)))
+		shader_set_uniform_f(_uniUV, uvs[0], uvs[1], uvs[2], uvs[3]);
+		
+		sprite_index = sCol;
+		image_index = 0;
 	}
-	draw_sprite_ext(sItemHold,array_get(slots,0).type, x+xadd,y+yadd,dir,1,itemdir,c_white,1)
+	
+	draw_sprite_ext(array_get(slots,0).holdsprite,array_get(slots,0).type, x+xadd,y+yadd,dir,1,itemdir,c_white,1)
 	shader_reset();
 }
 
@@ -326,11 +339,12 @@ if(hoveringInv&&!(hoverequipeditem&&array_get(slots,0))&&!(hoverhelditem&&array_
 
 			top.timer = .75;
 			top.timermax = .75;
+			top.alphamax = .5;
+			top.ripplemax = 1;
+			
 			bottom.timer = .75;
 			bottom.timermax = .75;
-			top.alphamax = .5;
 			bottom.alphamax = .5;
-			top.ripplemax = 1;
 			bottom.ripplemax = 1;
 			
 			ripplecooldown = .5;
@@ -340,13 +354,30 @@ if(hoveringInv&&!(hoverequipeditem&&array_get(slots,0))&&!(hoverhelditem&&array_
 
 //draw held item
 if(array_get(slots,1)!=noone) {
+
 	if(hoverhelditem) {
 		shader_set(sWhiteOutline)
-		var texelW = texture_get_texel_width(sprite_get_texture(sItemHold,array_get(slots,1).type))
-		var texelH = texture_get_texel_height(sprite_get_texture(sItemHold,array_get(slots,1).type))
+		var texelW = texture_get_texel_width(sprite_get_texture(array_get(slots,1).holdsprite,array_get(slots,1).type))
+		var texelH = texture_get_texel_height(sprite_get_texture(array_get(slots,1).holdsprite,array_get(slots,1).type))
 		shader_set_uniform_f(pixelDims,texelW,texelH)
+	} else {
+		shader_set(sWaterDraw)
+		
+		sprite_index = array_get(slots,1).holdsprite
+		
+		WDtexelW = texture_get_texel_width(sprite_get_texture(array_get(slots,1).holdsprite,array_get(slots,1).type))
+		WDtexelH = texture_get_texel_height(sprite_get_texture(array_get(slots,1).holdsprite,array_get(slots,1).type))
+		uvs = sprite_get_uvs(array_get(slots,1).holdsprite,array_get(slots,1).type)
+	
+		shader_set_uniform_f(uWDpixelDims,WDtexelW,WDtexelH)
+
+		shader_set_uniform_f(uPercent,max(height-(state==playerstate.running ? 23 : 25)-2+(bbox_bottom-bbox_top)/2,0))
+		shader_set_uniform_f(_uniUV, uvs[0], uvs[1], uvs[2], uvs[3]);
+		
+		sprite_index = sCol;
+		image_index = 0;
 	}
-	draw_sprite_ext(sItemHold,array_get(slots,1).type, x-5*dir,y-(state==playerstate.running ? 23 : 25),dir,1,0,c_white,1)
+	draw_sprite_ext(array_get(slots,1).holdsprite,array_get(slots,1).type, x-5*dir,y-(state==playerstate.running ? 23 : 25),dir,1,0,c_white,1)
 	shader_reset();
 }
 
@@ -365,7 +396,7 @@ if(legsInd>=sprite_get_number(legsSprite))
 	legsInd = 0;
 
 //hit/attack indexes
-if((floor(torsoInd)==2 || floor(torsoInd)==3) && hitcooldown<=0 && attackstate == playerattackstate.attacking) {
+if((floor(torsoInd)==2 || floor(torsoInd)==3) && hitcooldown<=0 && attackstate == playerattackstate.attacking&&!hasAttacked) {
 	hasAttacked = true;
 	hitcooldown = 1;
 	attackstate = playerattackstate.hit
@@ -374,22 +405,27 @@ if((floor(torsoInd)==2 || floor(torsoInd)==3) && hitcooldown<=0 && attackstate =
 //check for damages
 if(attackstate==playerattackstate.hit) {
 	var attackcollist = ds_list_create()
-	collision_circle_list(hitx,hity,range,all,true,true,attackcollist,false);
+	collision_circle_list(hitx,hity,range,oHitablePar,true,true,attackcollist,false);
+	var hitnothing = true;
 	
 	for(var i = 0; i < ds_list_size(attackcollist); i++) {
 		var col = ds_list_find_value(attackcollist,i);
 		if(object_get_parent(col.object_index)==oBossPar) {
+			hitnothing = false;
 			col.takeDamage();
 			break;
 		} else if(object_get_parent(col.object_index)==oCreaturePar&&col.despawnwait==-1) {
+			hitnothing = false;
 			col.takeDamage();
 			break;
 		} else if(col.object_index==oItem) {
+			hitnothing = false;
 			col.digOut()
 			break;
-		} else if(irandom_range(1,array_get(slots,0)==noone ? 10 : (array_get(slots,0).type==0 ? 5 : 10))==1) {
-			createFood(irandom_range(0,1),hitx,hity,irandom_range(50,70))
 		}
+	}
+	if(hitnothing&& irandom_range(1,array_get(slots,0)==noone ? 10 : (array_get(slots,0).type==0 ? 5 : 10))==1) {
+		createFood(irandom_range(0,1),hitx+(irandom_range(0,1) == 0 ? -1 : 1)*random_range(3,4),hity+(irandom_range(0,1) == 0 ? -1 : 1)*random_range(3,4),irandom_range(50,70))
 	}
 }
 
@@ -421,5 +457,6 @@ if(drownwait>0) {
 if(hp<=0) {
 	x = 0;
 	y = 0;
+	
 	hp = 3;
 }

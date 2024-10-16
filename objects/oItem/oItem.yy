@@ -12,7 +12,10 @@
     "name":"Player&Items",
     "path":"folders/Objects/Player&Items.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"oDrawParHitable",
+    "path":"objects/oDrawParHitable/oDrawParHitable.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -28,6 +31,7 @@
   "physicsStartAwake":true,
   "properties":[
     {"$GMObjectProperty":"v1","%Name":"type","filters":[],"listItems":[],"multiselect":false,"name":"type","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"0","varType":1,},
+    {"$GMObjectProperty":"v1","%Name":"holdsprite","filters":[],"listItems":[],"multiselect":false,"name":"holdsprite","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resource":{"name":"sItem0","path":"sprites/sItem0/sItem0.yy",},"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"sItem0","varType":5,},
   ],
   "resourceType":"GMObject",
   "resourceVersion":"2.0",

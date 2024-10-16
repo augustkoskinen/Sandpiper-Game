@@ -8,3 +8,9 @@ if((x<0||y<0||x>room_width||y>room_height||(curDepth<depthmin&&depthmin!=-1)||(c
 
 if(despawnwait<=0&&despawnwait>-1) instance_destroy();
 else if(despawnwait>0) despawnwait-=_dt;
+
+drawsprite = sprite_index
+drawindex = image_index
+drawx = x
+drawy = y
+drawalpha = image_alpha;

@@ -1,15 +1,16 @@
 {
   "$GMObject":"",
-  "%Name":"oGameManager",
+  "%Name":"oPiperItemSlots",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"oGameManager",
+  "name":"oPiperItemSlots",
   "overriddenProperties":[],
   "parent":{
-    "name":"Pars&Managers",
-    "path":"folders/Objects/Pars&Managers.yy",
+    "name":"Player&Items",
+    "path":"folders/Objects/Player&Items.yy",
   },
   "parentObjectId":null,
   "persistent":false,

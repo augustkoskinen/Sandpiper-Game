@@ -12,7 +12,10 @@
     "name":"Foods",
     "path":"folders/Objects/Foods.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"oDrawPar",
+    "path":"objects/oDrawPar/oDrawPar.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

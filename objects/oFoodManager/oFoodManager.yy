@@ -9,8 +9,8 @@
   "name":"oFoodManager",
   "overriddenProperties":[],
   "parent":{
-    "name":"Foods",
-    "path":"folders/Objects/Foods.yy",
+    "name":"Pars&Managers",
+    "path":"folders/Objects/Pars&Managers.yy",
   },
   "parentObjectId":null,
   "persistent":false,
